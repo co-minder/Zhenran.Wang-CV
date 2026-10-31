@@ -6,6 +6,13 @@
 /home/ubuntu/zhenran_wang_cv_buaa_web
 ```
 
+## 在线地址
+
+- 网页：<https://co-minder.github.io/Zhenran.Wang-CV/>
+- 仓库：<https://github.com/co-minder/Zhenran.Wang-CV>
+
+推送到 `main` 后由 `.github/workflows/pages.yml` 自动发布到 GitHub Pages。
+
 网页包含：
 
 - 中文简历、详细版简历、英文简历的 PDF 下载；
