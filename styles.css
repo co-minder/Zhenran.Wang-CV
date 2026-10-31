@@ -77,7 +77,7 @@ em { color: var(--blue); font-style: italic; }
 .embodied-card { border-top: 4px solid var(--blue); }
 .direction-top, .project-meta, .detail-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
 .index { font-family: var(--serif); color: var(--muted); font-size: 25px; font-style: italic; }
-.pill { display: inline-flex; align-items: center; width: max-content; padding: 4px 9px; border-radius: 99px; font-size: 9px; font-weight: 900; letter-spacing: .12em; }
+.pill { display: inline-flex; align-items: center; width: max-content; max-width: 100%; padding: 4px 9px; border-radius: 99px; font-size: 9px; font-weight: 900; letter-spacing: .12em; }.pill-row { display: flex; flex-wrap: wrap; gap: 5px; }
 .pill.coral { color: #a44331; background: var(--coral-soft); }
 .pill.blue { color: #28638e; background: var(--blue-soft); }
 .pill.neutral { color: #60717c; background: #edf0f1; }
