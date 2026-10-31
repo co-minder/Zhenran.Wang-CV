@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="RSI-Math 详细研究调研：失败诊断驱动的数学推理模型自改进数据框架。" />
+    <title>RSI-Math 研究调研 · 王振冉</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <div class="page-shell">
+      <header class="research-topbar">
+        <a class="brand" href="index.html"><span>ZW</span><small>CV / RESEARCH</small></a>
+        <nav class="topnav" aria-label="研究调研导航"><a href="index.html">← 返回简历主页</a><a href="embodied-socialsim.html">Embodied-SocialSim →</a></nav>
+        <a class="top-link" href="index.html#projects">项目列表 ↗</a>
+      </header>
+
+      <main id="main-content">
+        <section class="research-page-hero rsi-hero">
+          <div class="research-page-copy">
+            <p class="eyebrow">COMPLETED PROJECT 01 · REASONING DATA · DETAILED STUDY</p>
+            <h1>RSI-Math<br /><em>数学推理模型的失败诊断</em><br />与递归自改进数据框架</h1>
+            <p class="hero-lede">RSI-Math 已完成一套 5 步失败诊断与递归数据改进闭环：从数学推理轨迹中定位能力缺口，生成并验证针对性训练数据，再通过共同初始化、hold-out、迁移和成本记录评估干预质量。项目交付重点不是堆题，而是把“失败—诊断—数据—训练—评测”做成可复用协议。</p>
+            <div class="tag-row hero-tags"><span>Researcher Agent</span><span>PyTorch</span><span>SymPy</span><span>Verifier</span><span>Hold-out</span><span>2026.08 — 至今</span></div>
+          </div>
+          <div class="research-page-aside"><div class="contact-card"><span class="card-label">COMPLETED PROJECT DELIVERABLE</span><strong>模型错在什么能力环节？</strong><span>已完成从失败轨迹到数据干预和迁移评测的闭环设计。</span><span class="pill coral">5-STAGE LOOP · 5 FAILURE TYPES · 6 EVAL AXES</span></div></div>
+        </section>
+
+        <section class="research-body">
+          <div class="research-intro-grid">
+            <article class="research-intro-card accent-coral"><p class="mini-kicker">RESEARCH BRIEF</p><h3>一句话定义</h3><p>从失败中诊断能力缺口，从缺口中构造可验证数据，从数据中训练候选模型，再用受控评测检查真实迁移；每一轮都留下失败样本、假设、数据版本、验证记录和成本账本。</p></article>
+            <article class="research-intro-card accent-blue"><p class="mini-kicker">COMPLETED DELIVERABLES</p><h3>已经完成的项目包</h3><p>已完成 5 步闭环、5 类失败 taxonomy、4 类数据干预、1 套 provenance schema 和 6 个评测维度；每轮保留失败轨迹、诊断、验证、训练和成本记录。</p></article>
+            <nav class="research-toc" aria-label="RSI-Math 页面目录"><a href="#why"><span>01</span><strong>为什么做</strong></a><a href="#loop"><span>02</span><strong>闭环</strong></a><a href="#taxonomy"><span>03</span><strong>失败分类</strong></a><a href="#architecture"><span>04</span><strong>系统结构</strong></a><a href="#protocol"><span>05</span><strong>实验协议</strong></a><a href="#generalization"><span>06</span><strong>迁移评测</strong></a><a href="#related"><span>07</span><strong>相关工作</strong></a><a href="#risks"><span>08</span><strong>风险与交付</strong></a></nav>
+          </div>
+
+          <article class="research-section-block" id="why">
+            <p class="mini-kicker">01 / WHY THIS PROBLEM</p>
+            <h2>数学推理的“答对”并不等于“会证明”</h2>
+            <p class="research-lead">一个模型可能碰巧得到正确答案，也可能依赖错误的中间等式；也可能在熟悉题型上表现良好，但遇到未见组合、参数变化或形式化检查就失效。若训练数据只保留最终答案，失败的结构信息会被丢掉，后续干预也无法回答“究竟修复了什么”。</p>
+            <div class="research-card-grid"><article class="research-card"><span>A</span><strong>答案层与过程层</strong><p>结果正确、推理过程可靠、证明可以形式化，是三个不同层级的目标，不能用一个 reward 覆盖。</p></article><article class="research-card"><span>B</span><strong>数据扩充与能力修复</strong><p>无差别增加题目可能只带来熟悉度和记忆；诊断驱动的数据应对应一个明确能力缺口。</p></article><article class="research-card"><span>C</span><strong>分数与真实迁移</strong><p>研究集提升可能来自复用和选择；必须加入未见题型、难度变化、跨任务和多次运行。</p></article></div>
+          </article>
+
+          <article class="research-section-block" id="loop">
+            <p class="mini-kicker">02 / THE CLOSED LOOP</p>
+            <h2>诊断 → 干预 → 重训 → 迁移</h2>
+            <div class="loop-diagram"><div class="loop-node loop-node-a"><small>STEP 1</small><strong>数学推理失败</strong><span>答案、步骤、证明和验证日志</span></div><div class="loop-arrow">→</div><div class="loop-node loop-node-b"><small>STEP 2</small><strong>能力缺口诊断</strong><span>错误类型、证据和归因假设</span></div><div class="loop-arrow">→</div><div class="loop-node loop-node-c"><small>STEP 3</small><strong>数据干预</strong><span>题目 / 解答 / 反例 / 验算程序</span></div><div class="loop-arrow">→</div><div class="loop-node loop-node-d"><small>STEP 4</small><strong>从 M<sub>0</sub> 重训</strong><span>共同初始化、多策略对照</span></div><div class="loop-arrow">→</div><div class="loop-node loop-node-e"><small>STEP 5</small><strong>受控评测</strong><span>hold-out / verifier / transfer / cost</span></div><div class="loop-back">↺ 分析迁移、稳定性与成本；只有通过停止条件才进入下一轮</div></div>
+            <div class="research-figure"><div class="research-architecture"><div class="arch-node"><b>Failure log</b><small>题目、步骤、答案、错误轨迹</small></div><div class="arch-node"><b>Researcher</b><small>提出诊断假设和数据计划</small></div><div class="arch-node"><b>Verifier</b><small>SymPy / proof / program checks</small></div><div class="arch-node"><b>Trainer</b><small>从同一 M<sub>0</sub> 训练候选</small></div><div class="arch-node"><b>Evaluator</b><small>迁移、稳定性、代价与停止</small></div></div><figcaption><b>系统阅读图。</b> 研究者 Agent 负责数据研究，不直接把自己的文本“当作答案”；验证器负责筛掉不满足数学契约的样本；评测器负责判断训练结果是否超出一次性选择波动。</figcaption></div>
+            <figure class="research-image-figure"><img src="assets/research/rsi-math-loop.svg" alt="RSI-Math 失败诊断到递归评测的研究闭环图" /><figcaption><b>可视化研究导图。</b> 这是一张为本调研页绘制的协议图，不是外部论文 Figure；它把失败轨迹、验证器、共同初始化和停止条件放在同一条闭环中。</figcaption></figure>
+          </article>
+
+          <article class="research-section-block" id="taxonomy">
+            <p class="mini-kicker">03 / FAILURE TAXONOMY</p>
+            <h2>先把“错”拆成可干预的能力问题</h2>
+            <p class="research-lead">失败分类不是为了给模型贴标签，而是为了决定下一步生成什么数据、需要什么验证器、应该在哪个测试集上观察变化。分类必须保留原始轨迹和证据，避免把 Agent 的事后解释当成事实。</p>
+            <div class="research-table-wrap"><table class="research-table"><thead><tr><th>层级</th><th>典型失败</th><th>可验证证据</th><th>候选干预</th></tr></thead><tbody><tr><td>表示 / 解析</td><td>读错变量、条件、图形或符号</td><td>原题与解析后的结构不一致</td><td>等价改写、结构化解析、反例配对</td></tr><tr><td>局部计算</td><td>代数变形、算术或边界条件错误</td><td>SymPy 化简、代入检查、数值反例</td><td>逐步演算、错误定位、局部修复样本</td></tr><tr><td>策略选择</td><td>选择不适用的定理或证明路线</td><td>路线前提不满足，或换题型立即失败</td><td>路线对照、方法选择题、近邻反例</td></tr><tr><td>全局证明</td><td>逻辑跳跃、循环论证、漏掉情况</td><td>证明检查器、反例搜索、分支覆盖</td><td>完整证明与最小反例成对训练</td></tr><tr><td>迁移 / 可靠性</td><td>熟题正确，参数变化或形式化时失效</td><td>跨模板、跨难度、跨任务和多次种子</td><td>组合迁移集、难度阶梯、独立验证集</td></tr></tbody></table></div>
+          </article>
+
+          <article class="research-section-block" id="architecture">
+            <p class="mini-kicker">04 / RESEARCHER–VERIFIER–TRAINER</p>
+            <h2>四种角色分开，才能知道改进从哪里来</h2>
+            <div class="research-card-grid"><article class="research-card"><span>R</span><strong>Researcher Agent</strong><p>读取允许的失败反馈，形成能力假设，选择数据操作、来源和预算；不能修改评价集或跳过验证。</p></article><article class="research-card"><span>V</span><strong>Verifier</strong><p>检查题目条件、答案程序、证明步骤、反例和证据；验证通过才可进入训练集。</p></article><article class="research-card"><span>T</span><strong>Trainer</strong><p>按照固定训练配方从 M<sub>0</sub> 训练候选模型；训练失败也计入该轮预算。</p></article><article class="research-card"><span>E</span><strong>Evaluator</strong><p>在研究集、hold-out、迁移集和形式化检查上测量收益，并记录方差和资源成本。</p></article><article class="research-card"><span>H</span><strong>History</strong><p>保存每轮计划、数据版本、失败恢复、分数、验证结果和时间成本；历史可影响下一轮策略。</p></article><article class="research-card"><span>G</span><strong>Guardrails</strong><p>数据污染、答案泄露、验证器绕过、best-of-k 选择和递归停止条件都要显式审计。</p></article></div>
+             <p class="research-code-note">字段示例：展示交付协议的记录结构，不代表某一次模型结果。</p><pre class="research-code">{
+  "failure_id": "algebra_0042",
+  "task": "prove_or_solve",
+  "trajectory": {"problem": "...", "steps": ["..."], "answer": "..."},
+  "diagnosis": {"type": "local_algebra", "evidence": ["..."], "confidence": 0.72},
+  "intervention": {"operation": "counterexample_pair", "source": "verified"},
+  "verification": {"symbolic": true, "proof": false, "admitted": false},
+  "provenance": {"eval_id": null, "source_hash": "...", "round": 1}
+}</pre>
+          </article>
+
+          <article class="research-section-block" id="protocol">
+            <p class="mini-kicker">05 / EXPERIMENT PROTOCOL</p>
+            <h2>把“自我改进”变成可以反驳的实验</h2>
+            <div class="research-table-wrap"><table class="research-table"><thead><tr><th>协议项</th><th>固定 / 变化</th><th>必须报告</th></tr></thead><tbody><tr><td>共同起点</td><td>所有策略从同一个 M<sub>0</sub>、同一 tokenizer 和训练配方开始</td><td>初始化哈希、训练步数、学习率、数据量</td></tr><tr><td>干预策略</td><td>随机扩充、错误针对性、verifier 反馈、混合策略</td><td>样本来源、操作比例、去重和验证通过率</td></tr><tr><td>反馈权限</td><td>分数、错误文本、完整轨迹、验证证据做分层消融</td><td>每个条件看到什么，不能看到什么</td></tr><tr><td>候选选择</td><td>固定研究集选择，但最终要在独立集合重跑</td><td>best-of-k、选择规则、候选数量和未选候选</td></tr><tr><td>递归轮次</td><td>预设最大轮数和停止门槛，不允许无限循环</td><td>每轮增益、负迁移、验证失败和停止原因</td></tr></tbody></table></div>
+            <div class="protocol-grid"><div class="protocol-card"><span>M0</span><strong>共同初始化</strong><p>不让上一轮 checkpoint 变成下一轮的隐藏变量。</p></div><div class="protocol-card"><span>V</span><strong>验证器门控</strong><p>样本必须通过程序化或形式化检查才能进入训练。</p></div><div class="protocol-card"><span>H</span><strong>History ablation</strong><p>比较保留研究历史和清空历史的策略。</p></div><div class="protocol-card"><span>BO</span><strong>Best-of-k 对照</strong><p>区分真正提升与从多次候选中挑最好的一次。</p></div><div class="protocol-card"><span>TR</span><strong>Transfer</strong><p>在未见题型、难度和组合任务上测迁移。</p></div><div class="protocol-card"><span>C</span><strong>Cost</strong><p>把训练、验证、推理和人工审计成本一起报告。</p></div></div>
+          </article>
+
+          <article class="research-section-block" id="generalization">
+            <p class="mini-kicker">06 / GENERALIZATION AND METRICS</p>
+            <h2>真正的成功标准不是“这一轮最高分”</h2>
+            <div class="research-table-wrap"><table class="research-table"><thead><tr><th>评测面</th><th>测量内容</th><th>成功信号</th><th>失败解释</th></tr></thead><tbody><tr><td>In-domain</td><td>研究过的题型和操作</td><td>分数上升且验证通过率稳定</td><td>可能只是熟悉度或数据记忆</td></tr><tr><td>Hold-out</td><td>同分布但未参与诊断的题</td><td>收益不依赖训练样本重合</td><td>若下降，可能是过拟合或分布偏置</td></tr><tr><td>Cross-task</td><td>代数→组合、几何→证明等组合</td><td>能力在结构变化下保持</td><td>若只在单任务提升，能力解释更窄</td></tr><tr><td>Formal / verifier</td><td>形式化证明、程序检查或反例测试</td><td>过程可靠性同步改善</td><td>答案分提升但形式化失败，说明 reward hacking</td></tr><tr><td>Stability</td><td>多种子、多轮、不同候选选择</td><td>均值和方差都可接受</td><td>一次成功可能是 best-of-k 波动</td></tr><tr><td>Cost</td><td>数据、训练、验证和 Agent 调用</td><td>收益 / 成本比可解释</td><td>小幅提升但成本指数增长，实用价值有限</td></tr></tbody></table></div>
+            <div class="status-banner"><div class="boundary-icon">✓</div><p><b>评测规则：</b>研究集、hold-out、迁移、过程验证和多次运行分层报告；模型改进结论以整套证据为依据，而不是只看单次 benchmark 分数。</p></div>
+            <figure class="research-image-figure"><img src="assets/research/rsi-math-evaluation.svg" alt="RSI-Math 多层评测边界图" /><figcaption><b>评测边界图。</b> 研究集分数只是第一层；hold-out、迁移、形式化验证、稳定性和成本共同决定能否形成能力改进结论。</figcaption></figure>
+          </article>
+
+          <article class="research-section-block" id="related">
+            <p class="mini-kicker">07 / RELATED WORK MAP</p>
+            <h2>RSI-Math 不是凭空提出“自我改进”</h2>
+            <div class="related-grid"><a class="related-card" href="https://arxiv.org/abs/2511.22570" target="_blank" rel="noreferrer"><span>SELF-VERIFIABLE REASONING</span><strong>DeepSeekMath-V2</strong><small>生成器—验证器闭环和证明检查，支持把验证器作为训练和数据构造的一等组件。</small><i>↗</i></a><a class="related-card" href="https://arxiv.org/abs/2511.18760" target="_blank" rel="noreferrer"><span>FORMAL CHECKING</span><strong>HERMES</strong><small>在非正式探索和 Lean 形式化检查之间交错，说明过程可靠性可以被纳入 Agent loop。</small><i>↗</i></a><a class="related-card" href="https://arxiv.org/abs/2203.14465" target="_blank" rel="noreferrer"><span>REASONING TRAINING</span><strong>STaR</strong><small>通过带理由样本和迭代训练改善推理；RSI-Math 更强调失败诊断、验证和受控迁移。</small><i>↗</i></a><a class="related-card" href="https://arxiv.org/abs/2212.10560" target="_blank" rel="noreferrer"><span>SYNTHETIC DATA</span><strong>Self-Instruct</strong><small>展示模型生成指令数据的路径，但不自动解决数学证明的正确性契约。</small><i>↗</i></a><a class="related-card" href="https://arxiv.org/abs/2303.17651" target="_blank" rel="noreferrer"><span>INFERENCE-TIME</span><strong>Self-Refine</strong><small>强调推理时反馈与修正；RSI-Math 研究的是把失败转成训练数据后的长期改进。</small><i>↗</i></a><div class="related-card related-gap"><span>OUR ANGLE</span><strong>协议化的失败研究</strong><small>贡献空间不是重新命名 self-improvement，而是把诊断粒度、数据契约、共同起点和迁移评测绑定成可反驳协议。</small></div></div>
+          </article>
+
+          <article class="research-section-block" id="risks">
+            <p class="mini-kicker">08 / RISKS, FAILURE MODES, DELIVERY NOTES</p>
+            <h2>递归系统最危险的地方，是它会把错误放大</h2>
+            <div class="research-risk-grid"><article class="research-risk"><strong>Verifier gaming</strong><p>模型学会满足形式检查的表面格式，却没有获得可迁移的证明能力。需要多种检查器、反例和人工抽查。</p></article><article class="research-risk"><strong>Diagnosis collapse</strong><p>所有失败都被归成“推理能力不足”，导致数据干预失去针对性。需要保留原始轨迹和可审计证据。</p></article><article class="research-risk"><strong>Selection bias</strong><p>只报告候选中最好的结果，会把 best-of-k 当成单模型改进。必须冻结选择规则并报告全体候选。</p></article><article class="research-risk"><strong>Recursive drift</strong><p>上一轮生成的数据和错误解释会污染下一轮。需要 provenance、版本锁和最大轮数。</p></article><article class="research-risk"><strong>Contamination</strong><p>训练样本来自评价问题或其答案时，分数失去意义。来源搜索、去重和评测隔离必须成为硬门禁。</p></article><article class="research-risk"><strong>Compute asymmetry</strong><p>Agent 调研成本远高于普通训练。要报告总调用、验证时间、训练次数和失败重试，而不是只报准确率。</p></article></div>
+            <div class="research-status-grid"><article class="research-status-card"><span>DELIVERABLE 1 / DATA CONTRACT</span><strong>失败分类与数据契约</strong><p>完成失败 schema、验证器接口、来源记录和污染检查。</p></article><article class="research-status-card"><span>DELIVERABLE 2 / LOOP PROTOCOL</span><strong>诊断—干预—重训闭环</strong><p>完成共同初始化、4 类干预策略和每轮历史记录机制。</p></article><article class="research-status-card"><span>DELIVERABLE 3 / EVALUATION SUITE</span><strong>迁移与稳定性评测</strong><p>完成 hold-out、跨任务、形式化、best-of-k、稳定性和成本六维评测框架。</p></article></div>
+             <div class="status-banner" style="margin-top:22px"><div class="boundary-icon">✓</div><p><b>项目交付状态：</b>RSI-Math 已完成研究框架、数据协议、验证器接口、递归流程和评测矩阵；模型运行记录按基座与实验批次独立归档，项目主体以协议化交付呈现。</p></div>
+          </article>
+
+          <article class="research-section-block">
+            <p class="mini-kicker">SOURCES / RESEARCH NOTES</p>
+            <h2>调研来源</h2>
+            <div class="research-source-grid"><a class="research-source" href="https://arxiv.org/abs/2511.22570" target="_blank" rel="noreferrer"><span>MATHEMATICAL REASONING</span><strong>DeepSeekMath-V2</strong><small>验证器反馈、证明检查与自验证推理。</small></a><a class="research-source" href="https://arxiv.org/abs/2511.18760" target="_blank" rel="noreferrer"><span>FORMAL REASONING</span><strong>HERMES</strong><small>非正式探索与 Lean 检查交错。</small></a><a class="research-source" href="research/sources.md"><span>LOCAL RECORD</span><strong>来源清单</strong><small>本网站的调研来源、证据边界和核对记录。</small></a></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer"><span>ZW / RSI-MATH</span><span>子页面：详细研究调研</span><a href="index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
+    </div>
+  </body>
+</html>

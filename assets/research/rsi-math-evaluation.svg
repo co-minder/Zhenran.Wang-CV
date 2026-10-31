@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">RSI-Math evaluation boundary</title>
+  <desc id="desc">Evaluation layers for in-domain, hold-out, transfer, formal verification, stability, and cost.</desc>
+  <rect width="1200" height="620" rx="22" fill="#f7f6f2"/>
+  <text x="56" y="58" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="2" fill="#3379a8">RSI-MATH / EVALUATION BOUNDARY</text>
+  <text x="56" y="94" font-family="Arial,sans-serif" font-size="16" fill="#65707b">A score increase is only one cell in the evidence matrix.</text>
+  <g font-family="Arial,sans-serif" font-size="15">
+    <rect x="56" y="136" width="1088" height="56" rx="8" fill="#182b3d"/>
+    <text x="80" y="171" fill="#fff" font-weight="700">CONTROLLED TRAINING</text><text x="420" y="171" fill="#c9d8df">same M₀ · same recipe · same budget · explicit candidate selection</text>
+    <g transform="translate(56 220)">
+      <rect width="330" height="78" rx="8" fill="#fff" stroke="#d9dde0"/><text x="20" y="32" fill="#d6634d" font-weight="700">IN-DOMAIN</text><text x="20" y="58" fill="#46545d">did the researched task improve?</text>
+      <rect x="378" width="330" height="78" rx="8" fill="#fff" stroke="#d9dde0"/><text x="398" y="32" fill="#3379a8" font-weight="700">HOLD-OUT</text><text x="398" y="58" fill="#46545d">did the gain survive new items?</text>
+      <rect x="756" width="330" height="78" rx="8" fill="#fff" stroke="#d9dde0"/><text x="776" y="32" fill="#c29a4c" font-weight="700">TRANSFER</text><text x="776" y="58" fill="#46545d">did the skill cross task boundaries?</text>
+    </g>
+    <g transform="translate(56 332)">
+      <rect width="330" height="78" rx="8" fill="#fff" stroke="#d9dde0"/><text x="20" y="32" fill="#8f7fb5" font-weight="700">FORMAL / VERIFIER</text><text x="20" y="58" fill="#46545d">did the process stay valid?</text>
+      <rect x="378" width="330" height="78" rx="8" fill="#fff" stroke="#d9dde0"/><text x="398" y="32" fill="#76a9c6" font-weight="700">STABILITY</text><text x="398" y="58" fill="#46545d">does it repeat across seeds?</text>
+      <rect x="756" width="330" height="78" rx="8" fill="#fff" stroke="#d9dde0"/><text x="776" y="32" fill="#60717c" font-weight="700">COST</text><text x="776" y="58" fill="#46545d">is the gain worth the loop?</text>
+    </g>
+    <path d="M600 435V492" stroke="#d6634d" stroke-width="3"/>
+    <rect x="286" y="492" width="628" height="72" rx="10" fill="#faece7" stroke="#d6634d"/>
+    <text x="600" y="523" text-anchor="middle" fill="#17212b" font-weight="700">CLAIM ONLY WHEN THE CELLS AGREE</text><text x="600" y="548" text-anchor="middle" fill="#60473f">otherwise report a hypothesis, not a capability improvement</text>
+  </g>
+</svg>

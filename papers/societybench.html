@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="SocietyBench 论文介绍：匿名化反事实社会世界中的事件预测评测。" />
+    <title>SocietyBench · 论文介绍 · 王振冉</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="paper-page">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <div class="page-shell">
+      <header class="research-topbar">
+        <a class="brand" href="../index.html"><span>ZW</span><small>CV / RESEARCH</small></a>
+        <nav class="topnav" aria-label="论文导航"><a href="../index.html#publications">← 代表论文</a><a href="groundbench.html">下一篇：GroundBench →</a></nav>
+        <span class="top-link">PAPER 03 / SOCIETYBENCH</span>
+      </header>
+
+      <main id="main-content">
+        <section class="paper-hero paper-navy">
+          <div class="paper-hero-copy">
+            <p class="eyebrow">PAPER 03 · ARXIV 2608.04009 · AAAI 2027 UNDER REVIEW</p>
+            <h1>SocietyBench</h1>
+            <h2>Forecasting Counterfactual Social-World Evolution</h2>
+            <p class="paper-authors"><b>Zhenran Wang</b><sup>†∗</sup>, Zhonghan Bian<sup>†</sup>, Jinsong Li, Zhangyang Qi<sup>∗</sup></p>
+            <p class="paper-abstract">SocietyBench 不把社会事件当作一篇文章后的问答题，而是把真实事件整理成带事实层和公众意见层的时间线，在每个截止点生成预测问题。模型看到的是经过实体替换和日期平移的反事实社会世界，必须预测之后会发生什么；结果沿概率校准和时间精度两条互相独立的 100 分轴评分。</p>
+            <div class="paper-linkrow"><a href="https://arxiv.org/abs/2608.04009" target="_blank" rel="noreferrer">arXiv 原文 ↗</a><a href="https://co-minder.github.io/Societybench" target="_blank" rel="noreferrer">项目主页 ↗</a></div>
+          </div>
+          <aside class="paper-hero-aside">
+            <figure class="paper-cover"><img src="../assets/papers/societybench/cover.png" alt="SocietyBench 论文首页" /><figcaption>arXiv 版本第 1 页</figcaption></figure>
+            <div class="paper-status-box"><span>STATUS</span><strong>arXiv / Under Review</strong><small>论文、匿名化时间线、题库和评分代码构成完整评测系统。</small></div>
+          </aside>
+        </section>
+
+        <section class="paper-body">
+          <div class="paper-linkbar"><strong>一篇论文式网页导读</strong><span>动机 → 反事实构造 → 双轴评分 → 实验发现</span><nav><a href="#problem">动机</a><a href="#method">方法</a><a href="#results">结果</a><a href="#limits">边界</a></nav></div>
+
+          <div class="paper-kpis">
+            <div class="paper-kpi"><span>EVENTS</span><strong>05</strong><small>跨公共争议、地缘冲突、科技政策、金融与贸易</small></div>
+            <div class="paper-kpi"><span>PREDICTION POINTS</span><strong>125</strong><small>每个事件 25 个截止点</small></div>
+            <div class="paper-kpi"><span>SCORING AXES</span><strong>02 × 100</strong><small>概率校准 + 时间精度</small></div>
+            <div class="paper-kpi"><span>MODEL COHORT</span><strong>6 LLMs</strong><small>另有 3 个 Agent 框架与 2 个非 LLM 基线</small></div>
+          </div>
+
+          <article class="paper-section-block" id="problem">
+            <p class="mini-kicker">01 / WHY THIS BENCHMARK</p>
+            <h3>不考模型“记得什么”，而考模型能否从早期信息推演后续</h3>
+            <p>如果把一个已经发生、被广泛报道的事件原样交给模型，模型答对可能只是识别出熟悉的故事。SocietyBench 的关键设计是：把一条真实事件的前半段作为可见上下文，把后半段留作 Ground Truth；在模型看到之前，替换实体、平移日期，让故事保留因果和时间结构，却失去可以直接匹配预训练记忆的表面标签。</p>
+            <p>它和社会模拟也不同：社会模拟关心生成一个看起来像社会的虚拟群体；SocietyBench 关心在给定真实社会事件开端的情况下，模型能否预测后续演化，并且可以用已发生的后半段定量评分。</p>
+            <figure class="paper-figure"><img src="../assets/papers/societybench/teaser.png" alt="SocietyBench 反事实社会世界方法示意图" /><figcaption><b>论文 teaser。</b> 原始事件经过实体替换和日期平移后成为结构保持、标签隐藏的 counterfactual social world；模型在每个截止点只看前缀，未来节点用于评分。</figcaption></figure>
+          </article>
+
+          <article class="paper-section-block" id="method">
+            <p class="mini-kicker">02 / BENCHMARK CONSTRUCTION</p>
+            <h3>从一句话课题到可审计的预测题库</h3>
+            <figure class="paper-figure"><img src="../assets/papers/societybench/methodology.png" alt="SocietyBench methodology 方法图" /><figcaption><b>Figure 2 / 方法概览。</b> 每个 retrospective cutoff 将匿名化时间线切成可见上下文和 held-out future，再分别生成 calibration 与 temporal 两种题集。</figcaption></figure>
+            <div class="paper-step-grid">
+              <div class="paper-step-card"><span>01</span><strong>Collect</strong><p>跨 Web 新闻和五个社交平台采集事件材料。</p></div>
+              <div class="paper-step-card"><span>02</span><strong>Distill</strong><p>生成按日期索引的事实层与公众意见层时间线。</p></div>
+              <div class="paper-step-card"><span>03</span><strong>Anonymize</strong><p>替换实体、平移日期，并用反向识别审计检查泄露。</p></div>
+              <div class="paper-step-card"><span>04</span><strong>Score</strong><p>对概率和日期分别评分，再汇总跨事件表现。</p></div>
+            </div>
+            <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>组成</th><th>论文设置</th><th>为什么重要</th></tr></thead><tbody><tr><td>事件类型</td><td>公共争议、地缘冲突、科技政策、金融市场、贸易政策</td><td>避免单一事件形态决定结论。</td></tr><tr><td>时间线</td><td>事实事件与公众意见分层，再按日期合并</td><td>社会事实变化和舆论变化不必同步。</td></tr><tr><td>题目</td><td>每个截止点生成概率题与未来日期题</td><td>校准能力与时间定位能力分开。</td></tr><tr><td>发布</td><td>中文和英文一一对应；匿名实体与平移日期保持一致</td><td>跨语言版本不会成为简单的去匿名通道。</td></tr></tbody></table></div>
+          </article>
+
+          <article class="paper-section-block">
+            <p class="mini-kicker">03 / THREE-PHASE ANONYMIZATION</p>
+            <h3>匿名化不是删名字，而是同时打断实体记忆和绝对时间</h3>
+            <div class="paper-split"><article><h4>A. 确定性替换</h4><p>按最长匹配表替换人名、组织、地点等实体，再对一个事件的所有日期统一加上同一个随机偏移。这样保留事件内部的时间间隔，却破坏原始日历位置。</p></article><article><h4>B. 反向识别审计</h4><p>三个对抗式审计模型尝试从匿名材料恢复原事件和时间窗口；若持续识别成功，就进入增补和重跑，而不是直接把样本放进题库。</p></article></div>
+            <div class="paper-callout"><strong>C. 语义一致性：</strong>替换后在段落、事件和叙事层与原始材料对照，修复实体替换造成的语义损伤。论文报告五个事件的持续 High 识别为 0/15，持续 Mid 为 2/15。</div>
+            <div class="paper-figure-grid" style="margin-top:25px"><figure class="paper-figure"><img src="../assets/papers/societybench/score-bars.png" alt="SocietyBench 评分结果柱状图" /><figcaption><b>结果图。</b> 六个模型在两个评分轴上的跨事件表现。</figcaption></figure><figure class="paper-figure"><img src="../assets/papers/societybench/ablation.png" alt="SocietyBench 消融雷达图" /><figcaption><b>消融图。</b> 题库组成与评分设计的稳定性检查。</figcaption></figure></div>
+          </article>
+
+          <article class="paper-section-block" id="results">
+            <p class="mini-kicker">04 / EVALUATION AND FINDINGS</p>
+            <h3>两条评分轴揭示“会判断”与“会定位时间”不是一回事</h3>
+            <div class="paper-split"><article><h4>Calibration</h4><p>模型为事件是否在指定窗口发生给出概率，按时间衰减和窗口因素加权，转换为 0–100 分。它衡量的是不确定性表达和结果判断，而不只是命中率。</p></article><article><h4>Temporal accuracy</h4><p>模型为未来事件给出日期，误差以天数衡量，再转成 0–100 分。它直接测试模型能否定位事件发生时间，而不是只判断“会不会发生”。</p></article></div>
+            <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>观察</th><th>论文报告</th><th>解释</th></tr></thead><tbody><tr><td>总体上限</td><td>最强模型 75.0 / 100；简单锚点约 50</td><td>社会事件预测仍有明显余量。</td></tr><tr><td>轴间分离</td><td>GPT-5.5 领先两个轴；Gemini 校准较强但时间较弱</td><td>单一总分会隐藏能力结构。</td></tr><tr><td>事件差异</td><td>单个轴的模型间事件差距最高达 21.4 分</td><td>只评一个事件的结论不稳。</td></tr><tr><td>Agent 编排</td><td>三个共享 Doubao 基座的 Agent 框架没有超过基座模型</td><td>加一层 orchestration 不等于预测能力提升。</td></tr></tbody></table></div>
+            <p class="paper-callout"><strong>论文的核心结论：</strong>社会预测应同时报告“概率是否校准”和“时间是否准确”，并在多个异质事件上评测；单事件、单轴或事后识别都可能造成过度解读。</p>
+          </article>
+
+          <article class="paper-section-block" id="limits">
+            <p class="mini-kicker">05 / LIMITATIONS AND RELEASE</p>
+            <h3>它解决了记忆泄露问题，但不等于获得了真实社会的全部信息</h3>
+            <div class="paper-split"><article><h4>需要诚实保留的限制</h4><ul><li>匿名化是防记忆的代理方案，不是证明模型绝对无法反推；</li><li>社交平台数据受平台排序、删除、审核和机器人影响，不能当作全体公众意见样本；</li><li>事实时间线和舆论摘要来自自动流水线，仍需要质量门控和来源审计；</li><li>双轴分数描述预测表现，不直接说明模型内部用了什么推理过程。</li></ul></article><article><h4>可复现材料</h4><ul><li>匿名化时间线和问题题库；</li><li>逐题模型日志与评分脚本；</li><li>事件级统计量和引导法置信区间；</li><li>事件采集、清洗、题库生成和评测服务。</li></ul></article></div>
+            <div class="paper-sources"><a class="paper-source-card" href="https://arxiv.org/abs/2608.04009" target="_blank" rel="noreferrer"><span>FULL PAPER</span><strong>arXiv 2608.04009</strong><small>查看完整方法、表格和限制讨论。</small></a><a class="paper-source-card" href="https://co-minder.github.io/Societybench" target="_blank" rel="noreferrer"><span>PROJECT PAGE</span><strong>SocietyBench</strong><small>项目主页和公开材料入口。</small></a><a class="paper-source-card" href="worldcup.html"><span>COMPANION PAPER</span><strong>WorldCup Arena</strong><small>同一研究线的真正前瞻式控制条件。</small></a></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer"><span>ZW / SOCIETYBENCH</span><span>论文介绍 · arXiv 2608.04009</span><a href="../index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
+    </div>
+  </body>
+</html>

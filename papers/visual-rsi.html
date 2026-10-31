@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Visual-RSI 论文介绍：让 Agent 从视觉模型失败中设计可验证训练数据。" />
+    <title>Visual-RSI · 论文介绍 · 王振冉</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="paper-page">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <div class="page-shell">
+      <header class="research-topbar">
+        <a class="brand" href="../index.html"><span>ZW</span><small>CV / RESEARCH</small></a>
+        <nav class="topnav" aria-label="论文导航"><a href="../index.html#publications">← 代表论文</a><a href="societybench.html">下一篇：SocietyBench →</a></nav>
+        <span class="top-link">PAPER 02 / VISUAL-RSI</span>
+      </header>
+
+      <main id="main-content">
+        <section class="paper-hero paper-coral">
+          <div class="paper-hero-copy">
+            <p class="eyebrow">PAPER 02 · CVPR IN PREPARATION</p>
+            <h1>Visual-RSI</h1>
+            <h2>Can Agents Turn Visual Evidence into Better Training Data?</h2>
+            <p class="paper-authors"><b>Zhenran Wang</b><sup>∗</sup>, Jinsong Li<sup>∗</sup>, Zhonghan Bian, Feiran Huang<sup>†</sup>, Zhangyang Qi</p>
+            <p class="paper-abstract">Visual-RSI 研究一个反过来的问题：Agent 能不能研究视觉模型在哪里失败，并据此设计更有效的训练数据？框架覆盖图表、2D/3D 几何、流程/图推理和网页界面；研究者 Agent 诊断失败、提出假设、生成并验证数据，再把目标视觉语言模型从共同初始模型 <code>M<sub>0</sub></code> 重新训练，以观察干预是否真的带来改进。</p>
+            <div class="paper-linkrow"><a href="../assets/papers/visual-rsi/paper.pdf" target="_blank">查看本地论文 PDF ↗</a><a href="../index.html#projects">项目经历 ↗</a></div>
+          </div>
+          <aside class="paper-hero-aside">
+            <figure class="paper-cover"><img src="../assets/papers/visual-rsi/cover.png" alt="Visual-RSI 论文首页" /><figcaption>本地论文稿第 1 页</figcaption></figure>
+            <div class="paper-status-box"><span>STATUS</span><strong>In Preparation</strong><small>当前论文稿明确披露：模型结果为模拟结果，局部图表构造检查为已完成验证。</small></div>
+          </aside>
+        </section>
+
+        <section class="paper-body">
+          <div class="paper-linkbar"><strong>一篇论文式网页导读</strong><span>问题 → 框架 → 研究协议 → 结果边界</span><nav><a href="#problem">问题</a><a href="#framework">框架</a><a href="#protocol">协议</a><a href="#evidence">证据边界</a></nav></div>
+
+          <div class="paper-kpis">
+            <div class="paper-kpi"><span>VISUAL DOMAINS</span><strong>04</strong><small>Charts · Geometry · Flow/Graph · Web UI</small></div>
+            <div class="paper-kpi"><span>CROSSED CONFIGS</span><strong>28</strong><small>7 inference models × 4 research harnesses</small></div>
+            <div class="paper-kpi"><span>RESEARCH LOOP</span><strong>5 attempts</strong><small>每次从同一份 M<sub>0</sub> 重新训练</small></div>
+            <div class="paper-kpi"><span>LOCAL CHECKS</span><strong>171 + 536</strong><small>图表构造与成对操作检查，不等于模型实证</small></div>
+          </div>
+
+          <article class="paper-section-block" id="problem">
+            <p class="mini-kicker">01 / RESEARCH QUESTION</p>
+            <h3>从“视觉答错了”走向“应该怎样改数据”</h3>
+            <p>一般的视觉问答评测只问模型答案是否正确。Visual-RSI 把研究对象换成数据设计本身：同一个错误答案背后可能是算术错误、坐标轴误读、图例与系列的绑定错误，或是模型没有把网页元素与操作目标对应起来。不同失败原因需要不同训练干预，盲目增加数据量并不能说明能力得到修复。</p>
+            <p>论文因此把目标模型和研究者 Agent 分开：研究者负责观察失败并设计数据，目标视觉语言模型负责接受训练；评价的是训练后的目标模型，而不是研究者自己能否回答视觉问题。</p>
+            <figure class="paper-figure"><img src="../assets/papers/visual-rsi/figure1.png" alt="Visual-RSI 论文图一：视觉失败证据引导训练数据研究" /><figcaption><b>Figure 1 / 研究对象。</b> 失败证据进入研究者 Agent，数据经过构造和验证后训练一个独立的目标 VLM；模型结果与研究者的推理能力分开测量。</figcaption></figure>
+          </article>
+
+          <article class="paper-section-block" id="framework">
+            <p class="mini-kicker">02 / TASK AND FRAMEWORK</p>
+            <h3>不是自我反思，而是可控的数据研究闭环</h3>
+            <figure class="paper-figure"><img src="../assets/papers/visual-rsi/task-overview.png" alt="Visual-RSI 任务总览图" /><figcaption><b>Figure 2 / 任务总览。</b> 左侧是普通视觉问答；右侧是从目标模型的错误出发，提出研究假设、生成可验证数据、从共同初始化训练并在固定评价集上比较。</figcaption></figure>
+            <div class="paper-step-grid">
+              <div class="paper-step-card"><span>01</span><strong>Diagnose failures</strong><p>记录错误模式、失败样本和可观察的视觉证据。</p></div>
+              <div class="paper-step-card"><span>02</span><strong>Propose hypotheses</strong><p>把错误归因成能力缺口与预期收益假设。</p></div>
+              <div class="paper-step-card"><span>03</span><strong>Generate &amp; verify</strong><p>选择数据操作、生成样本并检查答案和证据区域。</p></div>
+              <div class="paper-step-card"><span>04</span><strong>Train from M<sub>0</sub></strong><p>每个候选从相同初始权重训练，再在固定集合评测。</p></div>
+            </div>
+            <div class="paper-split" style="margin-top:30px">
+              <article><h4>四类视觉任务</h4><ul><li><b>Charts：</b>结构化表格、坐标轴、图例和数值关系；</li><li><b>2D/3D Geometry：</b>空间关系与几何构造；</li><li><b>Flow / Graph：</b>节点、边和流程逻辑；</li><li><b>Web UI：</b>静态截图上的组件定位与界面理解。</li></ul></article>
+              <article><h4>可验证的数据操作</h4><ul><li>修改柱形图的数值时，自动重算答案；</li><li>颜色或绑定置换必须保持语义契约一致；</li><li>反例和对照样本保留源状态、改动因素和证据区域；</li><li>排除评价图片、答案和标识符的污染。</li></ul></article>
+            </div>
+          </article>
+
+          <article class="paper-section-block" id="protocol">
+            <p class="mini-kicker">03 / RESEARCH PROTOCOL</p>
+            <h3>共同初始化让“数据干预”可以被比较</h3>
+            <p>Visual-RSI 的核心控制不是让 Agent 无限迭代，而是把每个候选数据策略放在相同的训练起点、训练配方和评价集合上。研究历史可以积累，但候选模型权重不继承上一轮，从而把“研究计划变好了”和“模型偶然继承了上一轮状态”区分开。</p>
+            <figure class="paper-figure"><img src="../assets/papers/visual-rsi/protocol.png" alt="Visual-RSI 五轮研究协议图" /><figcaption><b>Figure 3 / 研究协议。</b> 模型 × harness 交叉运行；每一轮由研究历史和允许的诊断反馈生成数据计划，候选模型都从 M<sub>0</sub> 训练，再回到冻结评价集。</figcaption></figure>
+            <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>控制项</th><th>论文中的设置</th><th>要回答的问题</th></tr></thead><tbody><tr><td>研究者组合</td><td>7 个推理模型 × 4 个 harness，共 28 种配置</td><td>模型能力与运行框架的作用是否能拆开看？</td></tr><tr><td>反馈消融</td><td>只有分数 / 文本错误 / 错误图片 / 验证证据区域</td><td>更丰富的诊断信息是否带来更好的数据设计？</td></tr><tr><td>训练方式</td><td>目标模型从同一个 M<sub>0</sub> 重新训练；每条轨迹 5 次尝试</td><td>改进来自数据策略，还是来自继承和选择波动？</td></tr><tr><td>评价集合</td><td>研究用集合、迁移集合、通用视觉集合分别记录</td><td>训练收益是否迁移，而不是只记住研究过的题目？</td></tr></tbody></table></div>
+          </article>
+
+          <article class="paper-section-block">
+            <p class="mini-kicker">04 / VERIFIABLE DATA CONSTRUCTION</p>
+            <h3>“生成了数据”还不够，数据必须留下可检查的契约</h3>
+            <div class="paper-split">
+              <article><h4>图表原型的局部验证</h4><p>论文报告一个图表构造原型：14 个作者编写 fixture 通过 171 项检查，24 对操作开关匹配样本通过 536 项检查。这些检查验证答案重算、证据区域一致性和操作契约。</p><p class="paper-callout"><strong>读法：</strong>这是数据构造层的本地检查，不是研究者诊断能力，也不是目标 VLM 已经学会视觉推理的证据。</p></article>
+              <article><h4>从错误到干预的映射</h4><ul><li>数值读错 → 数值变换 + 程序化答案；</li><li>图例绑定错 → 类型安全的颜色/系列置换；</li><li>边界理解错 → 对照轮廓和几何证据；</li><li>界面定位错 → 组件树、截图和静态操作目标。</li></ul></article>
+            </div>
+          </article>
+
+          <article class="paper-section-block" id="evidence">
+            <p class="mini-kicker">05 / RESULTS AND EVIDENCE BOUNDARY</p>
+            <h3>论文展示了研究协议，但当前不应把模拟结果写成实证结论</h3>
+            <figure class="paper-figure-grid">
+              <figure class="paper-figure"><img src="../assets/papers/visual-rsi/case-study.png" alt="Visual-RSI 研究案例图" /><figcaption><b>Figure 5 / 研究案例。</b> 展示一条从错误观察到数据策略和模型分数的完整轨迹。</figcaption></figure>
+              <figure class="paper-figure"><img src="../assets/papers/visual-rsi/boundary-evolution.png" alt="Visual-RSI 视觉边界演化设计素材" /><figcaption><b>Archived design material。</b> 这是本地图源归档中的边界演化设计素材，不是当前论文稿的正式 Figure；页面保留它是为了展示研究构造过程。</figcaption></figure>
+              <div class="paper-boundary paper-figure-wide"><strong>必须保留的证据边界：</strong>论文当前明确写明主实验模型结果为 simulated rather than empirical findings；真实验证需要独立执行。网页因此将“协议已实现”“局部构造检查”“模型结果待实证”分开呈现。</div>
+            </figure>
+          </article>
+
+          <article class="paper-section-block">
+            <p class="mini-kicker">06 / RELATED WORK AND CONTRIBUTION</p>
+            <h3>Visual-RSI 试图补上的位置</h3>
+            <div class="paper-split"><article><h4>与已有工作的差别</h4><p>RSIBench-Data 和 DataEnvGym 已经把数据研究、教师—学生环境或视觉任务纳入 Agent 流程；Self-Instruct、STaR 和 Self-Refine 则分别代表生成数据、推理自训练和推理时修正。Visual-RSI 的角度是把视觉失败证据、可验证构造、模块化研究者和共同初始化训练放进一个可审计协议。</p></article><article><h4>可形成的贡献</h4><ul><li>视觉数据干预的可验证操作接口；</li><li>模型 × harness 交叉的共同初始化研究环境；</li><li>把分数、文本错误、错误图片和证据区域做成受控消融；</li><li>明确区分“数据构造正确”“模型得到提升”和“提升发生迁移”。</li></ul></article></div>
+            <div class="paper-sources"><a class="paper-source-card" href="https://arxiv.org/abs/2607.25886" target="_blank" rel="noreferrer"><span>RELATED</span><strong>Recursive self-improvement</strong><small>与递归自改进数据研究的关系。</small></a><a class="paper-source-card" href="https://arxiv.org/abs/2406.11794" target="_blank" rel="noreferrer"><span>DATA RESEARCH</span><strong>DataComp-LM</strong><small>训练数据选择与规模化构造的参照。</small></a><a class="paper-source-card" href="../index.html#publications"><span>AUTHOR PAGE</span><strong>返回论文列表</strong><small>继续浏览其他论文介绍。</small></a></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer"><span>ZW / VISUAL-RSI</span><span>论文介绍 · 研究状态已按证据边界标注</span><a href="../index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
+    </div>
+  </body>
+</html>

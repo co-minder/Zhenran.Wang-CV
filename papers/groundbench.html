@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GroundBench 论文介绍：多分辨率多边形指代揭示视觉语言模型的几何输出鸿沟。" />
+    <title>GroundBench · 论文介绍 · 王振冉</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="paper-page">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <div class="page-shell">
+      <header class="research-topbar">
+        <a class="brand" href="../index.html"><span>ZW</span><small>CV / RESEARCH</small></a>
+        <nav class="topnav" aria-label="论文导航"><a href="../index.html#publications">← 代表论文</a><a href="worldcup.html">下一篇：WorldCup →</a></nav>
+        <span class="top-link">PAPER 04 / GROUNDBENCH</span>
+      </header>
+
+      <main id="main-content">
+        <section class="paper-hero paper-blue">
+          <div class="paper-hero-copy">
+            <p class="eyebrow">PAPER 04 · ARXIV 2609.27821 · ICLR 2027 UNDER REVIEW</p>
+            <h1>GroundBench</h1>
+            <h2>Multi-Resolution Polygon Grounding Exposes the Geometry Gap in Vision–Language Models</h2>
+            <p class="paper-authors">Zhonghan Bian<sup>†∗</sup>, <b>Zhenran Wang</b><sup>†∗</sup>, Jinsong Li, Zhangyang Qi<sup>∗</sup></p>
+            <p class="paper-abstract">边界框可以告诉我们模型找到了哪个物体，却不能说明模型能否表达这个物体的形状。GroundBench 固定同一组图像—表达—目标三元组，要求通用视觉语言模型通过文本接口输出恰好 N 个顶点的多边形，在 N ∈ {8, 16, 24, 32, 64} 五个预算下分别评估区域重叠、坐标序列完成和多边形合法性。</p>
+            <div class="paper-linkrow"><a href="https://arxiv.org/abs/2609.27821" target="_blank" rel="noreferrer">arXiv 原文 ↗</a><a href="https://co-minder.github.io/Groundbench" target="_blank" rel="noreferrer">项目主页 ↗</a></div>
+          </div>
+          <aside class="paper-hero-aside">
+            <figure class="paper-cover"><img src="../assets/papers/groundbench/cover.png" alt="GroundBench 论文首页" /><figcaption>ICLR 投稿稿第 1 页</figcaption></figure>
+            <div class="paper-status-box"><span>STATUS</span><strong>arXiv / Under Review</strong><small>局部结果来自已记录的模型配置；页面保留论文对输出协议和评测范围的限定。</small></div>
+          </aside>
+        </section>
+
+        <section class="paper-body">
+          <div class="paper-linkbar"><strong>一篇论文式网页导读</strong><span>框指标 → 多边形协议 → 几何输出结果</span><nav><a href="#problem">问题</a><a href="#benchmark">基准</a><a href="#results">结果</a><a href="#scope">范围</a></nav></div>
+
+          <div class="paper-kpis">
+            <div class="paper-kpi"><span>TRIPLES</span><strong>1,500</strong><small>RefCOCO / RefCOCO+ / RefCOCOg 各 500</small></div>
+            <div class="paper-kpi"><span>VERTEX BUDGETS</span><strong>05</strong><small>N = 8, 16, 24, 32, 64</small></div>
+            <div class="paper-kpi"><span>HOSTED MODELS</span><strong>04</strong><small>Doubao · Kimi · Qwen · Gemini</small></div>
+            <div class="paper-kpi"><span>OUTPUT CONTRACT</span><strong>Exact-N</strong><small>每个顶点为 0–999 的坐标整数序列</small></div>
+          </div>
+
+          <article class="paper-section-block" id="problem">
+            <p class="mini-kicker">01 / MOTIVATION</p>
+            <h3>框指标接近饱和，并不意味着模型会构造边界</h3>
+            <p>指代表达定位通常使用边界框：模型只要覆盖目标的大致位置就可能得到很高分。但不同轮廓可以共享同一个外接矩形，框指标无法检验模型能否把视觉和语言证据转换成可使用的区域。分割掩码更细，但通常需要专门的解码器；多边形提供了一个可以直接由聊天模型文本接口表达、又能进行区域评分的中间层。</p>
+            <p>论文的关键控制是 exact-N：图像、表达式和目标物体保持不变，只改变要求输出的顶点数量。顶点增加可能提高轮廓表达能力，也可能带来重复点、自交、序列过长和输出不完整。</p>
+            <figure class="paper-figure"><img src="../assets/papers/groundbench/pipeline.png" alt="GroundBench exact-N 多边形构造与评测流程图" /><figcaption><b>Figure 1 / GroundBench pipeline。</b> 同一个 image–expression–referent triple 生成五个 exact-N 目标，模型输出经过解析、栅格化和 IoU / 合法性评分。</figcaption></figure>
+          </article>
+
+          <article class="paper-section-block" id="benchmark">
+            <p class="mini-kicker">02 / BENCHMARK DESIGN</p>
+            <h3>把“找到目标”和“描述区域”拆成可测量的不同阶段</h3>
+            <div class="paper-step-grid">
+              <div class="paper-step-card"><span>01</span><strong>Frozen triple</strong><p>同一图像、表达式和 referent 在五个预算中保持不变。</p></div>
+              <div class="paper-step-card"><span>02</span><strong>Canonical target</strong><p>从源轮廓确定性插点或简化，得到 exact-N 目标。</p></div>
+              <div class="paper-step-card"><span>03</span><strong>Text output</strong><p>模型输出恰好 2N 个坐标值，解析失败计零。</p></div>
+              <div class="paper-step-card"><span>04</span><strong>Multi-axis score</strong><p>分别报告 filled IoU、parse coverage 与 legal polygon。</p></div>
+            </div>
+            <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>指标</th><th>测量对象</th><th>为什么不能省略</th></tr></thead><tbody><tr><td>Fixed IoU</td><td>所有计划问题，解析失败计零的填充区域重叠</td><td>反映交付给下游的整体有效性。</td></tr><tr><td>Parseable IoU</td><td>仅在输出满足 exact-N 时计算区域重叠</td><td>区分“会画区域”和“能完成输出契约”。</td></tr><tr><td>Legal coverage</td><td>坐标范围、非退化、无自交等多边形合法性</td><td>区分几何质量与格式/拓扑失败。</td></tr><tr><td>Target preference</td><td>与同类 distractor 相比是否更偏向目标</td><td>把目标选择和轮廓构造分开观察。</td></tr></tbody></table></div>
+          </article>
+
+          <article class="paper-section-block" id="results">
+            <p class="mini-kicker">03 / MAIN RESULTS</p>
+            <h3>顶点更多，不一定得到更好的几何输出</h3>
+            <figure class="paper-figure"><img src="../assets/papers/groundbench/budget-results.png" alt="GroundBench 五种顶点预算结果图" /><figcaption><b>结果图。</b> 固定分母 IoU、parseable-only IoU 与预算 N 的关系；N=64 的长输出契约放大了缺失和非法输出的影响。</figcaption></figure>
+            <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>论文观察</th><th>报告值</th><th>应该如何理解</th></tr></thead><tbody><tr><td>框 vs 直接多边形</td><td>框 IoU 约 88.2；直接多边形 pooled IoU 57.7</td><td>二者参考区域不同，不能直接当成同一指标的性能差。</td></tr><tr><td>同一轮廓参考</td><td>预测框转多边形约 57.3；直接多边形约 57.7</td><td>控制参考目标后，直接多边形的优势接近消失。</td></tr><tr><td>高预算失败</td><td>Gemini N=64 fixed IoU 37.7，parseable-only 63.4</td><td>长序列的完成率损失会显著压低固定分母得分。</td></tr><tr><td>合法性</td><td>Gemini N=64 legal coverage 约 7.5%</td><td>格式、重复点、自交和拓扑约束成为独立瓶颈。</td></tr></tbody></table></div>
+            <figure class="paper-figure-grid" style="margin-top:25px"><figure class="paper-figure"><img src="../assets/papers/groundbench/qualitative-overview.jpg" alt="GroundBench 定性结果总览" /><figcaption><b>定性案例。</b> 不同模型在同一 referent 上的多边形输出质量与完成情况。</figcaption></figure><figure class="paper-figure"><img src="../assets/papers/groundbench/accuracy-surface.png" alt="GroundBench 几何准确率表面图" /><figcaption><b>补充分析。</b> 预算和配置变化下的区域准确率。</figcaption></figure></figure>
+          </article>
+
+          <article class="paper-section-block">
+            <p class="mini-kicker">04 / CONTROLLED INTERVENTIONS</p>
+            <h3>错误不止来自视觉理解，也来自输出接口</h3>
+            <div class="paper-split"><article><h4>Thinking setting</h4><p>Qwen 的 thinking 开关在相同图像与表达式下影响完成率和区域质量；这说明性能差异不能只归结为“有没有找到目标”，也包含模型如何组织长坐标序列。</p></article><article><h4>False cues</h4><p>错误空间线索比错误颜色线索更具破坏性。它们是输入控制实验，不足以定位某个内部机制，但能提示评测需要分离语义选择、空间关系和边界生成。</p></article></div>
+            <div class="paper-callout"><strong>重要诊断：</strong>Kimi 在 N=8 时对目标的 preference 约 85.5%，但条件区域 IoU 约 44.6%；Qwen-max preference 约 85.2%，条件 IoU 约 57.5%。选中目标和描述好目标区域是两个不同问题。</div>
+          </article>
+
+          <article class="paper-section-block" id="scope">
+            <p class="mini-kicker">05 / SCOPE AND CONTRIBUTION</p>
+            <h3>GroundBench 测的是可交付的几何输出，不是潜在边界感知的全部</h3>
+            <div class="paper-split"><article><h4>贡献</h4><ul><li>把同一批 referent 重新映射到多分辨率 exact-N 多边形；</li><li>把区域重叠、序列完成和多边形合法性分开报告；</li><li>让通用 hosted VLM 在不增加专用 segmentation head 的情况下接受几何输出审计；</li><li>用 matched interventions 检查推理设置和空间线索。</li></ul></article><article><h4>边界</h4><ul><li>结果只覆盖抽样的 COCO referents 和特定日期的 hosted configurations；</li><li>多边形文本输出不等同于 latent boundary perception；</li><li>参考轮廓的离散化、栅格化和多部件选择会影响数值；</li><li>专家模型校准和 hosted API 不能当作完全公平的训练对比。</li></ul></article></div>
+            <div class="paper-sources"><a class="paper-source-card" href="https://arxiv.org/abs/2609.27821" target="_blank" rel="noreferrer"><span>FULL PAPER</span><strong>arXiv 2609.27821</strong><small>完整正文、附录和配置说明。</small></a><a class="paper-source-card" href="https://co-minder.github.io/Groundbench" target="_blank" rel="noreferrer"><span>PROJECT PAGE</span><strong>GroundBench</strong><small>项目主页与材料入口。</small></a><a class="paper-source-card" href="../index.html#publications"><span>AUTHOR PAGE</span><strong>返回论文列表</strong><small>继续浏览王振冉的其他论文。</small></a></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer"><span>ZW / GROUNDBENCH</span><span>论文介绍 · arXiv 2609.27821</span><a href="../index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
+    </div>
+  </body>
+</html>

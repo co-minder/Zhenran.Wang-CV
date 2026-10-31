@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" role="img" aria-labelledby="title desc">
+  <title id="title">RSI-Math failure diagnosis loop</title>
+  <desc id="desc">A proposed research loop from mathematical failure to diagnosis, intervention, retraining, and transfer evaluation.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1"><stop stop-color="#182b3d"/><stop offset="1" stop-color="#233d54"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b8d2df"/></marker>
+    <style>
+      .k{font:700 18px Arial,sans-serif;letter-spacing:2px;fill:#9fc2d5}.h{font:500 27px Georgia,serif;fill:#fff}.s{font:15px Arial,sans-serif;fill:#c9d8df}.n{font:italic 24px Georgia,serif;fill:#fff}
+    </style>
+  </defs>
+  <rect width="1400" height="560" rx="22" fill="url(#bg)"/>
+  <text x="54" y="60" class="k">RSI-MATH / PROPOSED RESEARCH LOOP</text>
+  <text x="54" y="101" class="s">The loop keeps the trajectory, the verifier, and the evaluation boundary visible.</text>
+  <g transform="translate(55 170)">
+    <g><rect width="220" height="190" rx="12" fill="#fff" fill-opacity=".09" stroke="#d6634d" stroke-width="3"/><text x="20" y="38" class="n">01</text><text x="20" y="83" class="h">Failure</text><text x="20" y="116" class="s">wrong answer /</text><text x="20" y="140" class="s">broken proof trace</text><text x="20" y="171" class="s">evidence is retained</text></g>
+    <g transform="translate(260)"><rect width="220" height="190" rx="12" fill="#fff" fill-opacity=".09" stroke="#c29a4c" stroke-width="3"/><text x="20" y="38" class="n">02</text><text x="20" y="83" class="h">Diagnose</text><text x="20" y="116" class="s">error type +</text><text x="20" y="140" class="s">capability hypothesis</text><text x="20" y="171" class="s">confidence + provenance</text></g>
+    <g transform="translate(520)"><rect width="220" height="190" rx="12" fill="#fff" fill-opacity=".09" stroke="#76a9c6" stroke-width="3"/><text x="20" y="38" class="n">03</text><text x="20" y="83" class="h">Intervene</text><text x="20" y="116" class="s">counterexample /</text><text x="20" y="140" class="s">proof / verified data</text><text x="20" y="171" class="s">validator gate</text></g>
+    <g transform="translate(780)"><rect width="220" height="190" rx="12" fill="#fff" fill-opacity=".09" stroke="#a6c987" stroke-width="3"/><text x="20" y="38" class="n">04</text><text x="20" y="83" class="h">Retrain</text><text x="20" y="116" class="s">same M₀ +</text><text x="20" y="140" class="s">controlled strategy</text><text x="20" y="171" class="s">cost is recorded</text></g>
+    <g transform="translate(1040)"><rect width="220" height="190" rx="12" fill="#fff" fill-opacity=".09" stroke="#8f7fb5" stroke-width="3"/><text x="20" y="38" class="n">05</text><text x="20" y="83" class="h">Evaluate</text><text x="20" y="116" class="s">hold-out / transfer /</text><text x="20" y="140" class="s">formal checks</text><text x="20" y="171" class="s">stop or recurse</text></g>
+    <path d="M220 95H252M480 95H512M740 95H772M1000 95H1032" stroke="#b8d2df" stroke-width="3" marker-end="url(#arrow)"/>
+  </g>
+  <path d="M1320 405C1320 485 1160 510 1030 510H270C130 510 80 450 80 375" fill="none" stroke="#d6634d" stroke-width="3" stroke-dasharray="8 10" marker-end="url(#arrow)"/>
+  <text x="515" y="535" class="s">research history changes the next plan; model weights restart from M₀</text>
+</svg>

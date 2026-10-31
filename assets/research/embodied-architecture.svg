@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" role="img" aria-labelledby="title desc">
+  <title id="title">Embodied-SocialSim proposed architecture</title>
+  <desc id="desc">A proposed architecture connecting device sensors, ROS2 and MHS/MOS, Agnes Harness, an agent planner, and a social simulation environment.</desc>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b8d2df"/></marker><style>.k{font:700 18px Arial,sans-serif;letter-spacing:2px;fill:#9fc2d5}.h{font:500 28px Georgia,serif;fill:#fff}.s{font:15px Arial,sans-serif;fill:#c9d8df}.n{font:italic 23px Georgia,serif;fill:#fff}</style></defs>
+  <rect width="1400" height="600" rx="22" fill="#182b3d"/>
+  <text x="54" y="58" class="k">EMBODIED-SOCIALSIM / PROPOSED SYSTEM MAP</text>
+  <text x="54" y="94" class="s">A research diagram, not a published paper figure or a safety certification.</text>
+  <g transform="translate(58 170)">
+    <g><rect width="220" height="210" rx="12" fill="#fff" fill-opacity=".09" stroke="#d6634d" stroke-width="3"/><text x="20" y="38" class="n">L1</text><text x="20" y="88" class="h">Device</text><text x="20" y="125" class="s">camera · pose · map</text><text x="20" y="151" class="s">health · actuator</text><text x="20" y="185" class="s">local safety controller</text></g>
+    <g transform="translate(260)"><rect width="220" height="210" rx="12" fill="#fff" fill-opacity=".09" stroke="#76a9c6" stroke-width="3"/><text x="20" y="38" class="n">L2</text><text x="20" y="88" class="h">ROS2</text><text x="20" y="125" class="s">nodes · topics</text><text x="20" y="151" class="s">services · actions</text><text x="20" y="185" class="s">time + message contracts</text></g>
+    <g transform="translate(520)"><rect width="220" height="210" rx="12" fill="#fff" fill-opacity=".09" stroke="#c29a4c" stroke-width="3"/><text x="20" y="38" class="n">L3</text><text x="20" y="88" class="h">MHS / MOS</text><text x="20" y="125" class="s">commands + tools</text><text x="20" y="151" class="s">observations + data</text><text x="20" y="185" class="s">declared capabilities</text></g>
+    <g transform="translate(780)"><rect width="220" height="210" rx="12" fill="#fff" fill-opacity=".09" stroke="#a6c987" stroke-width="3"/><text x="20" y="38" class="n">L4</text><text x="20" y="88" class="h">Agnes</text><text x="20" y="125" class="s">state · approval</text><text x="20" y="151" class="s">trace · recovery</text><text x="20" y="185" class="s">auditable runtime</text></g>
+    <g transform="translate(1040)"><rect width="220" height="210" rx="12" fill="#fff" fill-opacity=".09" stroke="#8f7fb5" stroke-width="3"/><text x="20" y="38" class="n">L5</text><text x="20" y="88" class="h">Agent + Sim</text><text x="20" y="125" class="s">perceive · plan</text><text x="20" y="151" class="s">act · interact</text><text x="20" y="185" class="s">social feedback</text></g>
+    <path d="M220 104H252M480 104H512M740 104H772M1000 104H1032" stroke="#b8d2df" stroke-width="3" marker-end="url(#a)"/>
+  </g>
+  <path d="M1265 425C1160 510 1020 520 820 520H220C120 520 75 455 75 390" fill="none" stroke="#d6634d" stroke-width="3" stroke-dasharray="8 10" marker-end="url(#a)"/>
+  <text x="480" y="558" class="s">action results return to the trace; the safety controller remains outside the LLM loop</text>
+</svg>

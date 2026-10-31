@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Embodied-SocialSim 详细研究调研：Agnes Harness 驱动的设备可接入具身 Agent 框架与社会仿真系统。" />
+    <title>Embodied-SocialSim 研究调研 · 王振冉</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <div class="page-shell">
+      <header class="research-topbar">
+        <a class="brand" href="index.html"><span>ZW</span><small>CV / RESEARCH</small></a>
+        <nav class="topnav" aria-label="研究调研导航"><a href="index.html">← 返回简历主页</a><a href="rsi-math.html">RSI-Math →</a></nav>
+        <a class="top-link" href="index.html#projects">项目列表 ↗</a>
+      </header>
+
+      <main id="main-content">
+        <section class="research-page-hero embodied-hero">
+          <div class="research-page-copy">
+            <p class="eyebrow">COMPLETED PROJECT 02 · EMBODIED SYSTEM · DETAILED STUDY</p>
+            <h1>Embodied-SocialSim<br /><em>设备可接入的具身 Agent 框架</em><br />与社会仿真系统</h1>
+            <p class="hero-lede">Embodied-SocialSim 已完成一套面向设备接入的具身 Agent 项目系统包：5 层架构、4 类设备协议对象、Agnes Harness 运行治理、视觉/YOLO、ROS2、MHS/MOS、规划执行、轨迹恢复和 6 轴评测矩阵。社会仿真被用作具身行为压力测试场，而不是社会事件预测项目。</p>
+            <div class="tag-row hero-tags"><span>Agnes Harness</span><span>YOLO</span><span>ROS2</span><span>MHS / MOS</span><span>LLM Agent</span><span>2026.08 — 至今</span></div>
+          </div>
+          <div class="research-page-aside"><div class="contact-card"><span class="card-label">COMPLETED PROJECT DELIVERABLE</span><strong>设备接入、运行治理、行为评测</strong><span>已完成 5 层系统图、4 类协议对象和 6 轴评测矩阵。</span><span class="pill blue">5 LAYERS · 4 PROTOCOL OBJECTS · 6 EVAL AXES</span></div></div>
+        </section>
+
+        <section class="research-body">
+          <div class="research-intro-grid">
+            <article class="research-intro-card accent-blue"><p class="mini-kicker">RESEARCH BRIEF</p><h3>一句话定义</h3><p>把设备、观测、Agent 运行时、规划执行和行为轨迹放到同一条可恢复、可审计链路，再用社会情境把具身 Agent 的失败暴露出来。</p></article>
+            <article class="research-intro-card accent-coral"><p class="mini-kicker">COMPLETED SYSTEM POSITION</p><h3>项目主次已经固定</h3><p>项目主线是设备可接入的具身 Agent 系统；Harness 管理高层任务和工具治理，设备控制器负责实时安全；社会仿真作为行为评测环境，和 SocietyBench 的事件预测线分开。</p></article>
+            <nav class="research-toc" aria-label="Embodied-SocialSim 页面目录"><a href="#why"><span>01</span><strong>为什么做</strong></a><a href="#layers"><span>02</span><strong>框架分层</strong></a><a href="#agnes"><span>03</span><strong>Agnes 职责</strong></a><a href="#protocol"><span>04</span><strong>设备协议</strong></a><a href="#social"><span>05</span><strong>社会仿真</strong></a><a href="#evaluation"><span>06</span><strong>评测矩阵</strong></a><a href="#related"><span>07</span><strong>相关工作</strong></a><a href="#roadmap"><span>08</span><strong>风险与交付</strong></a></nav>
+          </div>
+
+          <article class="research-section-block" id="why">
+            <p class="mini-kicker">01 / WHY AN EMBODIED RUNTIME</p>
+            <h2>从“模型会规划”到“机器人能执行并复盘”</h2>
+            <p class="research-lead">项目已将具身 Agent 的关键问题拆成状态连续性、行动治理和失败归因 3 个核心模块：系统持续记录设备状态、观测、动作结果和环境反馈，并让审批、轨迹和恢复成为运行时的一部分，而不是一次性 demo 的附属日志。</p>
+            <div class="research-card-grid"><article class="research-card"><span>01</span><strong>状态连续性</strong><p>把设备状态、传感器观测、任务历史和上一动作的结果放到可追踪上下文，而不是每次调用都从零开始。</p></article><article class="research-card"><span>02</span><strong>行动可治理</strong><p>模型提出计划不等于动作已经授权；工具审批、动作约束、日志和停止路径必须独立存在。</p></article><article class="research-card"><span>03</span><strong>失败可归因</strong><p>把视觉、导航、规划、社会推理和控制失败拆开，才知道应该改哪个模块。</p></article></div>
+          </article>
+
+          <article class="research-section-block" id="layers">
+            <p class="mini-kicker">02 / SYSTEM LAYERS</p>
+            <h2>五层架构：设备、通道、运行时、Agent、环境</h2>
+            <div class="research-figure"><div class="research-architecture"><div class="arch-node"><b>L1 / Device</b><small>camera · pose · map · health</small></div><div class="arch-node"><b>L2 / Transport</b><small>ROS2 topics / actions / services</small></div><div class="arch-node"><b>L3 / MHS-MOS</b><small>commands · observations · tools</small></div><div class="arch-node"><b>L4 / Harness</b><small>state · approval · trace · recovery</small></div><div class="arch-node"><b>L5 / Agent + Env</b><small>plan · act · social feedback</small></div></div><figcaption><b>框架主线。</b> 数据从设备侧向上进入 Agent，上层行动再通过受控工具回到设备；社会仿真与真实设备都应遵守同样的状态和轨迹契约。</figcaption></div>
+            <div class="research-table-wrap"><table class="research-table"><thead><tr><th>层</th><th>输入 / 输出</th><th>研究关注</th><th>硬边界</th></tr></thead><tbody><tr><td>L1 设备</td><td>传感器、位姿、健康状态、执行器结果</td><td>状态是否真实、及时、可恢复</td><td>实时安全由本地控制器负责</td></tr><tr><td>L2 ROS2</td><td>node、topic、service、action、parameter</td><td>模块替换、时序、记录和调试</td><td>通信通畅不等于策略正确</td></tr><tr><td>L3 MHS/MOS</td><td>MHS 命令 / 工具；MOS 观测 / 数据源</td><td>设备能力是否被明确声明和授权</td><td>高层 Agent 不直接绕过设备治理</td></tr><tr><td>L4 Harness</td><td>会话、任务状态、审批、事件账本、恢复</td><td>行动是否可审计、可暂停、可重放</td><td>不替代本体控制和安全认证</td></tr><tr><td>L5 Agent + 环境</td><td>计划、行动、环境反馈、社会状态</td><td>感知—决策—执行的行为质量</td><td>仿真结果不能直接等同真实部署</td></tr></tbody></table></div>
+            <figure class="research-image-figure"><img src="assets/research/embodied-architecture.svg" alt="Embodied-SocialSim 设备到社会仿真的分层架构图" /><figcaption><b>项目系统架构导图。</b> 这张图记录了已完成的职责分层：控制器安全边界、ROS2/MHS/MOS 通道、Agnes 运行时和社会实验环境分别承担不同职责。</figcaption></figure>
+          </article>
+
+          <article class="research-section-block" id="agnes">
+            <p class="mini-kicker">03 / WHAT AGNES HARNESS DOES</p>
+            <h2>Agnes 是运行和治理底座，不是机器人本体</h2>
+            <p class="research-lead">根据公开文档，Harness 的价值在于把模型的“想做什么”和系统的“允许做什么、实际做了什么、之后能否恢复”分开。Embodied-SocialSim 借用这种职责划分，把视觉、规划和设备适配器做成可替换模块，而不是把所有逻辑写成单次模型调用。</p>
+            <div class="research-card-grid"><article class="research-card"><span>STATE</span><strong>任务状态与历史</strong><p>保存目标、阶段、最近观测、动作结果和会话历史，支持多步任务而非孤立请求。</p></article><article class="research-card"><span>GOV</span><strong>工具审批与约束</strong><p>模型只能提出工具调用；系统根据声明、权限和当前状态决定是否执行。</p></article><article class="research-card"><span>TRACE</span><strong>轨迹与证据</strong><p>记录观测、计划、工具、结果、异常和恢复，让失败定位可以回到中间步骤。</p></article><article class="research-card"><span>RECOVER</span><strong>中断与恢复</strong><p>把暂停、重试、回滚、人工接管和重新规划作为显式状态，而不是异常日志。</p></article><article class="research-card"><span>PLUGIN</span><strong>模块化接入</strong><p>视觉、ROS2 适配器、导航和执行器可以按设备替换，避免与单一模型绑定。</p></article><article class="research-card"><span>AUDIT</span><strong>可复盘研究</strong><p>把每一次行动变成可检索轨迹，支持不同 Agent、策略和设备的同条件比较。</p></article></div>
+            <pre class="research-code">observation → state_update → plan_request
+            → policy / approval check
+            → tool_call(MHS) → controller
+            → action_result + MOS observation
+            → trace_ledger → recovery_or_next_step</pre>
+          </article>
+
+          <article class="research-section-block" id="protocol">
+            <p class="mini-kicker">04 / DEVICE PROTOCOL AND DATA CONTRACT</p>
+            <h2>设备接入首先是协议问题，其次才是模型问题</h2>
+            <p class="research-lead">项目已经冻结观测和行动的数据契约：所有记录都有版本、时间、来源和结果引用，用来回答“模型看到了什么”“动作针对哪个状态”“设备是否真的执行”“恢复发生在什么位置”。</p>
+            <div class="research-table-wrap"><table class="research-table"><thead><tr><th>记录</th><th>最小字段</th><th>用途</th></tr></thead><tbody><tr><td>Observation</td><td>timestamp、source、frame_id、payload、quality、calibration</td><td>保证视觉/位姿/健康状态有时间和来源。</td></tr><tr><td>ActionRequest</td><td>task_id、tool、args、preconditions、risk_level、timeout</td><td>让工具调用可审批、可拒绝和可复盘。</td></tr><tr><td>ActionResult</td><td>accepted、started、finished、status、error、controller_ref</td><td>区分“提出动作”“动作开始”“动作完成”。</td></tr><tr><td>Recovery</td><td>trigger、safe_state、retry_policy、human_override、resume_point</td><td>把中断和恢复从异常分支变成可评测行为。</td></tr></tbody></table></div>
+            <div class="paper-callout"><strong>安全原则：</strong>动作请求即使通过 Harness 审批，也必须再经过设备控制器的实时约束；急停、互锁、限位、断联后的安全状态和人工接管不能由 LLM 代替。</div>
+          </article>
+
+          <article class="research-section-block" id="social">
+            <p class="mini-kicker">05 / SOCIAL SIMULATION</p>
+            <h2>社会仿真是具身研究的可控压力测试场</h2>
+            <p class="research-lead">真实社会环境难以重复、难以精确标注，也无法随意改变规范和关系。仿真环境的作用是把这些变量显式化：同一个机器人任务可以在不同关系、规范、冲突和群体反馈下重放，用来观察 Agent 是否更新状态、改变计划并保持行动可解释。</p>
+            <div class="research-card-grid"><article class="research-card"><span>WORLD</span><strong>角色与关系</strong><p>角色具有目标、能力、可见信息和历史关系；信任、协作和冲突会随互动更新。</p></article><article class="research-card"><span>NORM</span><strong>规范与约束</strong><p>环境可以改变允许的动作、角色期待和资源分配，观察 Agent 是否识别规范变化。</p></article><article class="research-card"><span>EVENT</span><strong>事件与反馈</strong><p>请求、阻碍、误解和群体反应进入下一轮观测，而不是作为一次性 prompt 背景。</p></article></div>
+            <div class="research-figure"><div class="research-architecture"><div class="arch-node"><b>Observe</b><small>视觉 / 设备 / 对话</small></div><div class="arch-node"><b>Update</b><small>任务 / 关系 / 规范状态</small></div><div class="arch-node"><b>Plan</b><small>目标、约束、协作策略</small></div><div class="arch-node"><b>Act</b><small>工具调用与机器人行动</small></div><div class="arch-node"><b>Reflect</b><small>结果、信任、恢复、下一步</small></div></div><figcaption><b>社会互动循环。</b> 社会状态不是静态背景，而是行动结果的一部分；研究重点是 Agent 是否能把观测转化成状态更新和后续行为。</figcaption></div>
+            <div class="paper-boundary"><strong>主次边界：</strong>Embodied-SocialSim 的主线是设备接入、运行可靠性和具身行为评测。社会分析、互动和预测性指标服务于这个框架；SocietyBench 仍是独立的社会事件预测评测线。</div>
+          </article>
+
+          <article class="research-section-block" id="evaluation">
+            <p class="mini-kicker">06 / EVALUATION MATRIX</p>
+            <h2>评测要把“没走到”与“没理解”分开</h2>
+            <div class="research-table-wrap"><table class="research-table"><thead><tr><th>轴</th><th>问题</th><th>控制条件</th><th>指标示例</th></tr></thead><tbody><tr><td>Perception</td><td>是否从视觉和传感器获得正确状态？</td><td>固定导航和规划，替换感知输入</td><td>检测、跟踪、状态一致性、遮挡恢复</td></tr><tr><td>Planning</td><td>是否把状态转成可行计划？</td><td>提供 oracle perception，保持设备执行一致</td><td>计划可行率、约束违反、重规划次数</td></tr><tr><td>Execution</td><td>工具和设备是否按预期运行？</td><td>固定高层计划，测试不同通道和设备条件</td><td>延迟、成功率、丢包、动作确认、恢复</td></tr><tr><td>Social reasoning</td><td>是否理解角色、规范、关系和反馈？</td><td>用 Planning Oracle 或简化导航排除底层干扰</td><td>规范遵循、协作收益、冲突处理、状态更新</td></tr><tr><td>Reliability</td><td>系统是否可审计、可恢复、可复现？</td><td>注入中断、错误观测、工具拒绝和状态漂移</td><td>轨迹完整性、恢复成功率、人工接管率</td></tr><tr><td>Transfer</td><td>仿真中的结论能否迁移？</td><td>从仿真到硬件/高保真环境分阶段验证</td><td>行为保持率、差异类型、未覆盖风险</td></tr></tbody></table></div>
+            <div class="research-status-grid"><article class="research-status-card"><span>BASELINE</span><strong>One-shot Agent</strong><p>没有持久状态、审批和恢复记录的单次调用。</p></article><article class="research-status-card"><span>RUNTIME</span><strong>Harness Agent</strong><p>加入状态、工具治理、轨迹和恢复，但不改变模型。</p></article><article class="research-status-card"><span>PROJECT PACKAGE</span><strong>Embodied-SocialSim</strong><p>将设备、视觉、运行时和社会情境放入同一评测协议。</p></article></div>
+            <figure class="research-image-figure"><img src="assets/research/embodied-evaluation.svg" alt="Embodied-SocialSim 分层评测矩阵图" /><figcaption><b>评测矩阵导图。</b> 先用控制条件隔离感知、规划和执行，再单独评估社会推理、可靠性和仿真到设备的迁移。</figcaption></figure>
+          </article>
+
+          <article class="research-section-block" id="related">
+            <p class="mini-kicker">07 / RELATED WORK</p>
+            <h2>相关工作各自解决一段，项目关注它们之间的接口</h2>
+            <div class="related-grid"><a class="related-card" href="https://github.com/AgnesAI-Labs/agnes-harness" target="_blank" rel="noreferrer"><span>RUNTIME</span><strong>Agnes Harness</strong><small>公开的任务状态、工具审批、执行轨迹、恢复和 MHS/MOS 设备接入骨架。</small><i>↗</i></a><a class="related-card" href="https://docs.ros.org/en/jazzy/Concepts/Basic/About-Nodes.html" target="_blank" rel="noreferrer"><span>ROBOT MIDDLEWARE</span><strong>ROS 2</strong><small>以 node、topic、service、action 和 parameter 组织设备模块和运行时通信。</small><i>↗</i></a><a class="related-card" href="https://arxiv.org/abs/2604.16022" target="_blank" rel="noreferrer"><span>EMBODIED SOCIAL REASONING</span><strong>SocialGrid</strong><small>把规划、任务执行和社会推理放入具身多智能体环境，并通过 Planning Oracle 拆分能力。</small><i>↗</i></a><a class="related-card" href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noreferrer"><span>SOCIAL SIMULATION</span><strong>Generative Agents</strong><small>观察、记忆、反思和规划驱动的社会模拟，提供长期互动的经典组件。</small><i>↗</i></a><a class="related-card" href="https://aihabitat.org/" target="_blank" rel="noreferrer"><span>EMBODIED ENVIRONMENT</span><strong>Habitat</strong><small>提供具身导航和环境交互的研究基础，提醒评测要区分环境执行与高层推理。</small><i>↗</i></a><div class="related-card related-gap"><span>OUR ANGLE</span><strong>可恢复的系统接口</strong><small>把设备接入、Agent 治理、社会情境和失败审计放进一套分层、可替换、可迁移的框架。</small></div></div>
+          </article>
+
+          <article class="research-section-block" id="roadmap">
+            <p class="mini-kicker">08 / RISKS AND DELIVERY NOTES</p>
+            <h2>已完成的工程交付与验收分层</h2>
+            <div class="research-risk-grid"><article class="research-risk"><strong>接口漂移</strong><p>设备状态、ROS2 消息和 MHS/MOS schema 改变会让实验不可复现；需要版本化接口和回放数据。</p></article><article class="research-risk"><strong>社会仿真偏差</strong><p>仿真角色的行为规则可能把研究者假设伪装成真实社会规律；需要明确可控变量和外部验证。</p></article><article class="research-risk"><strong>安全误读</strong><p>Agent 通过一致性测试不等于设备安全；任何高风险动作都需要控制器约束和人工接管路径。</p></article><article class="research-risk"><strong>归因混淆</strong><p>底层导航或视觉错误会污染社会推理分数；需要 oracle、对照环境和逐层指标。</p></article><article class="research-risk"><strong>迁移断裂</strong><p>仿真中的规范遵循可能无法迁移到真实设备；要报告迁移失败，不只挑成功案例。</p></article><article class="research-risk"><strong>轨迹过载</strong><p>完整事件账本会带来存储、隐私和分析成本；需要分层日志、脱敏和可检索摘要。</p></article></div>
+            <div class="research-status-grid"><article class="research-status-card"><span>DELIVERABLE 1 / RUNTIME</span><strong>5 层系统架构</strong><p>完成 Device、ROS2、MHS/MOS、Harness、Agent/环境的职责划分。</p></article><article class="research-status-card"><span>DELIVERABLE 2 / PROTOCOL</span><strong>4 类设备记录</strong><p>完成 Observation、ActionRequest、ActionResult、Recovery 数据契约。</p></article><article class="research-status-card"><span>DELIVERABLE 3 / EVALUATION</span><strong>6 轴评测矩阵</strong><p>完成感知、规划、执行、社会推理、可靠性和迁移评测方案。</p></article></div>
+            <div class="status-banner" style="margin-top:22px"><div class="boundary-icon">✓</div><p><b>项目交付状态：</b>Embodied-SocialSim 已完成系统分层、设备协议、运行时职责、社会仿真循环和评测矩阵；设备型号与实验批次采用独立记录，项目主体以系统架构、协议和评测交付呈现。</p></div>
+          </article>
+
+          <article class="research-section-block">
+            <p class="mini-kicker">SOURCES / RESEARCH NOTES</p>
+            <h2>调研来源</h2>
+            <div class="research-source-grid"><a class="research-source" href="https://github.com/AgnesAI-Labs/agnes-harness" target="_blank" rel="noreferrer"><span>OFFICIAL RUNTIME</span><strong>Agnes Harness</strong><small>运行时、工具治理、轨迹、恢复和设备接入。</small></a><a class="research-source" href="https://github.com/AgnesAI-Labs/agnes-harness/tree/main/docs" target="_blank" rel="noreferrer"><span>DEVICE PROTOCOL</span><strong>MHS / MOS</strong><small>当前版本公开设备协议与观测/命令文档入口。</small></a><a class="research-source" href="research/sources.md"><span>LOCAL RECORD</span><strong>来源清单</strong><small>本网站的官方文档、论文和证据边界记录。</small></a></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer"><span>ZW / EMBODIED-SOCIALSIM</span><span>子页面：详细研究调研</span><a href="index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
+    </div>
+  </body>
+</html>

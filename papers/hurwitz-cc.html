@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hurwitz numbers with completed cycles and Gromov–Witten theory 论文介绍。" />
+    <title>Hurwitz-CC · 论文介绍 · 王振冉</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="paper-page">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <div class="page-shell">
+      <header class="research-topbar">
+        <a class="brand" href="../index.html"><span>ZW</span><small>CV / RESEARCH</small></a>
+        <nav class="topnav" aria-label="论文导航"><a href="../index.html#publications">← 代表论文</a><a href="hurwitz-lambda.html">下一篇：Hurwitz-λ<sub>g</sub> →</a></nav>
+        <span class="top-link">PAPER 06 / HURWITZ-CC</span>
+      </header>
+
+      <main id="main-content">
+        <section class="paper-hero paper-math">
+          <div class="paper-hero-copy">
+            <p class="eyebrow">PAPER 06 · TAMS ACCEPTED · ARXIV 2311.06316</p>
+            <h1>Hurwitz-CC</h1>
+            <h2>Hurwitz Numbers with Completed Cycles and Gromov–Witten Theory Relative to at Most Three Points</h2>
+            <p class="paper-authors">Ricky X. F. Chen, <b>Zhen-Ran Wang</b></p>
+            <p class="paper-abstract">完备圈 Hurwitz 数把普通 Hurwitz 数中的简单分支点替换为更一般的 completed cycles。论文处理此前显式结果主要集中在至多两个额外分支点的情形，给出三个点情形的显式公式，并进一步揭示关于完备圈阶数和分支剖分的分段多项式性、钩形 Hurwitz 数的构件作用，以及 λ<sub>g</sub> 猜想的类似结构。</p>
+            <div class="paper-linkrow"><a href="../assets/papers/hurwitz-cc/paper.pdf" target="_blank">查看原文 PDF ↗</a><a href="https://arxiv.org/abs/2311.06316" target="_blank" rel="noreferrer">arXiv 页面 ↗</a></div>
+          </div>
+          <aside class="paper-hero-aside">
+            <figure class="paper-cover"><img src="../assets/papers/hurwitz-cc/cover.png" alt="Hurwitz-CC 原论文首页" /><figcaption>arXiv 原文第 1 页</figcaption></figure>
+            <div class="paper-status-box"><span>STATUS</span><strong>TAMS Accepted</strong><small>Trans. Amer. Math. Soc.；原文以定理、公式和结构性质为主。</small></div>
+          </aside>
+        </section>
+
+        <section class="paper-body">
+          <div class="paper-linkbar"><strong>一篇数学论文式网页导读</strong><span>对象 → 三点显式公式 → 结构性质 → 意义</span><nav><a href="#background">背景</a><a href="#results">结果</a><a href="#structure">结构</a><a href="#value">意义</a></nav></div>
+
+          <div class="paper-kpis">
+            <div class="paper-kpi"><span>BRANCH-POINT REGIME</span><strong>r = 3</strong><small>相对于完备圈的三个分支点情形</small></div>
+            <div class="paper-kpi"><span>MAIN OUTPUT</span><strong>Explicit</strong><small>显式公式与生成函数</small></div>
+            <div class="paper-kpi"><span>STRUCTURE</span><strong>Piecewise</strong><small>对完备圈阶数和剖分部分段多项式性</small></div>
+            <div class="paper-kpi"><span>THEORY LINK</span><strong>GW / H</strong><small>与 Gromov–Witten 理论的对应关系</small></div>
+          </div>
+
+          <article class="paper-section-block" id="background">
+            <p class="mini-kicker">01 / MATHEMATICAL BACKGROUND</p>
+            <h3>Hurwitz 数在数什么？</h3>
+            <p>Hurwitz 数可以理解为带有指定分支数据的曲面覆盖的枚举量，也可以转化为对称群中具有给定循环类型的置换分解计数。普通情形里，简单分支点对应简单的换位；completed cycles 则把这个局部对象推广为更丰富的循环结构。</p>
+            <p>Okounkov–Pandharipande 建立的 GW/H correspondence 表明，带 completed cycles 的 Hurwitz 数与相对 Gromov–Witten 理论的 stationary sector 之间存在深层对应。问题在于：计算上已知结果更多集中在分支点数较少的场景，超过两个点后显式公式和结构分析都变得困难。</p>
+            <div class="paper-callout"><strong>论文真正推进的地方：</strong>不是只计算某几个数，而是把 r=3 的对象写成可以继续分析的显式公式，并从公式中抽取多项式性、构件分解和猜想类似物。</div>
+          </article>
+
+          <article class="paper-section-block" id="results">
+            <p class="mini-kicker">02 / MAIN RESULTS</p>
+            <h3>从枚举对象到可计算的显式公式</h3>
+            <div class="math-result-grid"><div class="math-result"><strong>三点情形</strong><p>得到完备圈 Hurwitz 数在 r=3 情形的显式表达，突破此前主要集中于 r≤2 的可计算范围。</p></div><div class="math-result"><strong>生成函数</strong><p>将数值枚举组织为生成函数，便于读取不同剖分、阶数和 genus 的统一结构。</p></div><div class="math-result"><strong>Hook blocks</strong><p>某些钩形 Hurwitz 数成为一般对象的构件，提供从特殊形状到一般公式的组织方式。</p></div></div>
+            <div class="paper-split" style="margin-top:30px"><article><h4>公式层</h4><p>论文关注公式的显式可计算性：给定分支剖分和 completed-cycle 阶数，可以通过有限组合表达式得到对应的 Hurwitz 数，而不是只存在抽象递推。</p></article><article><h4>结构层</h4><p>显式公式进一步暴露出关于剖分部分和 completed-cycle 阶数的分段多项式性，为后续比较不同区域、不同 genus 和不同循环结构提供统一语言。</p></article></div>
+          </article>
+
+          <article class="paper-section-block" id="structure">
+            <p class="mini-kicker">03 / STRUCTURAL MAP</p>
+            <h3>这项工作怎样把不同数学对象连起来</h3>
+            <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>层级</th><th>对象 / 工具</th><th>网页理解</th></tr></thead><tbody><tr><td>枚举层</td><td>分支覆盖、剖分、completed cycles</td><td>明确要数的组合—几何对象。</td></tr><tr><td>表示层</td><td>置换、循环类型、cut-and-join 结构</td><td>把覆盖枚举转成可操作的代数表达。</td></tr><tr><td>生成层</td><td>生成函数与显式系数</td><td>把许多离散数组织成统一对象。</td></tr><tr><td>几何层</td><td>Gromov–Witten theory / stationary sector</td><td>解释为什么这些枚举数与相对 GW 理论相关。</td></tr><tr><td>猜想层</td><td>λ<sub>g</sub> conjecture analogue</td><td>从具体公式走向高 genus 结构规律。</td></tr></tbody></table></div>
+            <figure class="paper-figure"><div class="paper-architecture-mini"><div>Completed-cycle Hurwitz numbers<small>指定分支数据下的覆盖枚举</small></div><div>Explicit formula / generating function<small>把对象写成可计算表达式</small></div><div>Piecewise polynomiality<small>读取阶数与剖分变化的结构</small></div><div>Hook-shape building blocks<small>由特殊构件组织一般情形</small></div></div><figcaption><b>结构图（网页重排）。</b> 这不是原论文图片，而是根据论文摘要和结果组织出的阅读路线；原文的核心证据是定理、公式和证明。</figcaption></figure>
+          </article>
+
+          <article class="paper-section-block">
+            <p class="mini-kicker">04 / HOW TO READ THE MATHEMATICS</p>
+            <h3>从定义到定理，论文的证明路线是什么</h3>
+            <div class="paper-step-grid"><div class="paper-step-card"><span>01</span><strong>Fix the data</strong><p>先固定 genus、分支剖分和 completed-cycle 的阶数。</p></div><div class="paper-step-card"><span>02</span><strong>Build the count</strong><p>把覆盖枚举转换到置换/生成函数的可计算表达。</p></div><div class="paper-step-card"><span>03</span><strong>Extract structure</strong><p>从显式系数观察分段多项式性和 hook-shape 构件。</p></div><div class="paper-step-card"><span>04</span><strong>Prove the analogue</strong><p>比较高 genus 项，得到 λ<sub>g</sub> conjecture 的类似结构。</p></div></div>
+            <div class="paper-split" style="margin-top:30px"><article><h4>为什么需要“分段”</h4><p>双重 Hurwitz 类问题中的多项式性通常不是在所有参数空间上由同一个多项式给出，而是由墙面划分成不同 chamber；网页中的“piecewise”因此不是近似，而是结构定理需要说明的区域依赖。</p></article><article><h4>为什么强调 hook-shape</h4><p>特殊剖分并不是附带例子。若它们可以作为一般情形的 building blocks，就能把复杂公式拆成一组可独立研究、可组合的基本对象。</p></article></div>
+          </article>
+
+          <article class="paper-section-block" id="value">
+            <p class="mini-kicker">05 / RESEARCH VALUE</p>
+            <h3>为什么这篇数学论文会出现在 AI 简历里</h3>
+            <p>它和当前 AI 研究并不是“数学背景装饰”关系。论文训练的是面对复杂枚举对象时的几种核心能力：把对象定义清楚，把抽象问题变成可计算表示，从低复杂度情形寻找结构，再用严格证明确认结构是否成立。这种从对象、公式到可验证结论的工作方式，正是后续做评测协议、数据契约和 Agent 行为审计时所延续的研究习惯。</p>
+            <div class="paper-boundary"><strong>阅读边界：</strong>本页使用原论文首页作为真实论文图像；原文以数学公式和证明为主，没有把网页自行绘制的结构图冒充论文 Figure。想查看定理、定义和完整证明，请直接打开原文 PDF。</div>
+            <div class="paper-sources"><a class="paper-source-card" href="https://arxiv.org/abs/2311.06316" target="_blank" rel="noreferrer"><span>FULL PAPER</span><strong>arXiv 2311.06316</strong><small>摘要、PDF 和引用信息。</small></a><div class="paper-source-card"><span>PUBLICATION</span><strong>Trans. Amer. Math. Soc.</strong><small>TAMS accepted；正式版本信息以作者/期刊记录为准。</small></div><a class="paper-source-card" href="hurwitz-lambda.html"><span>COMPANION</span><strong>Hurwitz-λ<sub>g</sub></strong><small>另一篇完备 r 圈方向的工作。</small></a></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer"><span>ZW / HURWITZ-CC</span><span>论文介绍 · arXiv 2311.06316</span><a href="../index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
+    </div>
+  </body>
+</html>
