@@ -244,3 +244,30 @@ code { padding: 2px 5px; background: #eef2f3; color: var(--coral); font-family: 
 @media (max-width: 560px) { .project-entry .mini-kicker { padding-right: 58px; } }
 
 .paper-card.paper-card-featured { min-height: 0; padding-top: 16px; padding-bottom: 16px; }
+
+/* ---------- 2026-11 audit refinement ---------- */
+.profile-lede { max-width: 680px; margin: 0 0 16px; color: #46545d; font-size: 14px; line-height: 1.8; }
+.paper-card h3 { line-height: 1.25; }
+.source-section .material-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.research-note { display: flex; align-items: baseline; gap: 18px; padding: 18px 20px; margin: 22px 0 0; border-left: 3px solid var(--coral); background: rgba(255,255,255,.62); }
+.research-note b { flex: 0 0 auto; color: var(--coral); font-size: 10px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+.research-note span { color: #46545d; font-family: var(--serif); font-size: 15px; line-height: 1.6; }
+:where(a, button):focus-visible { outline: 3px solid rgba(214,99,77,.55); outline-offset: 3px; }
+.project-entry > div { min-width: 0; }
+.project-entry-badge { z-index: 1; background: rgba(255,255,255,.92); }
+
+@media (max-width: 900px) {
+  .source-section .material-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .research-note { display: grid; gap: 5px; }
+}
+
+@media (max-width: 560px) {
+  .profile-lede { font-size: 13px; line-height: 1.75; }
+  .source-section .material-grid { grid-template-columns: 1fr; }
+  .research-note { padding: 15px 16px; }
+  .research-note span { font-size: 14px; }
+  .project-entry-badge { position: static; display: inline-flex; grid-column: 1 / -1; grid-row: 1; width: max-content; margin: -3px 0 2px; }
+  .project-entry-number { grid-column: 1; grid-row: 2; }
+  .project-entry > div { grid-column: 2; grid-row: 2; }
+  .project-entry > i { grid-row: 3; }
+}
