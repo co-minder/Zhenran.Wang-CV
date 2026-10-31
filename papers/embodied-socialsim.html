@@ -24,10 +24,10 @@
             <h2>A Device-Ready Agent Framework for Embodied Robots</h2>
             <p class="paper-authors"><b>Zhenran Wang</b><sup>†∗</sup>, Zhonghan Bian<sup>†</sup>, Jinsong Li, Zhangyang Qi<sup>∗</sup></p>
             <p class="paper-abstract">这项工作以 Agnes Harness 为 Agent 运行和治理骨架，连接设备状态、视觉/YOLO、ROS2、MHS/MOS、规划、执行、轨迹与恢复机制；在此框架上构造可控社会仿真，用来检验机器人在多轮关系、规范和协作情境中的感知、决策与行动。主线是设备可接入的具身 Agent 框架，社会仿真是研究环境，而不是社会事件预测项目。</p>
-            <div class="paper-linkrow"><a href="../embodied-socialsim.html">进入完整研究调研 ↗</a><a href="../index.html#projects">项目经历 ↗</a></div>
+            <div class="paper-linkrow"><a href="../embodied-socialsim.html">查看项目细节 ↗</a><a href="../index.html#projects">项目经历 ↗</a></div>
           </div>
           <aside class="paper-hero-aside">
-            <div class="paper-manuscript-card project-status-card"><span style="color:var(--blue)">PROJECT STUDY · IN PREPARATION</span><strong>一个面向设备接入的系统框架</strong><small>已完成系统职责、设备协议、研究问题和评测协议的统一整理。</small><div class="tag-row paper-tag-list"><span>Agnes Harness</span><span>ROS2</span><span>MHS / MOS</span><span>YOLO</span></div><small>系统导图、协议字段和评测矩阵集中在“架构 / 评测”章节。</small></div>
+            <div class="paper-manuscript-card project-status-card"><span style="color:var(--blue)">PROJECT STUDY · IN PREPARATION</span><strong>一个面向设备接入的系统框架</strong><small>系统职责、设备协议、研究问题和评测协议的统一整理。</small><div class="tag-row paper-tag-list"><span>Agnes Harness</span><span>ROS2</span><span>MHS / MOS</span><span>YOLO</span></div><small>系统导图、协议字段和评测矩阵集中在“架构 / 评测”章节。</small></div>
             <div class="paper-status-box"><span>PROJECT STATUS</span><strong>In Preparation</strong><small>5 层架构 · 4 类协议对象 · 6 轴评测矩阵。</small></div>
           </aside>
         </section>
@@ -53,7 +53,7 @@
             <p class="mini-kicker">02 / SYSTEM ARCHITECTURE</p>
             <h3>四个工程层，外加一条不可越过的安全边界</h3>
              <div class="paper-step-grid"><div class="paper-step-card"><span>L1</span><strong>Device + vision</strong><p>相机、位姿、地图、健康状态和 YOLO 等可替换感知模块。</p></div><div class="paper-step-card"><span>L2</span><strong>ROS2 / MHS-MOS</strong><p>把持续观测、动作请求和状态反馈组织成可记录通道。</p></div><div class="paper-step-card"><span>L3</span><strong>Agnes runtime</strong><p>上下文、审批、工具执行、事件账本、恢复和会话历史。</p></div><div class="paper-step-card"><span>L4</span><strong>Agent + social env</strong><p>感知、规划、执行，在关系和规范组成的环境中循环。</p></div></div>
-             <figure class="paper-figure paper-architecture-figure"><div class="paper-architecture-mini paper-architecture-horizontal"><div>Device<small>camera · pose · health</small></div><div>ROS2 / MHS-MOS<small>commands · observations</small></div><div>Agnes Harness<small>state · approval · trace</small></div><div>Agent + SocialSim<small>plan · act · feedback</small></div></div><figcaption><b>Completed system map。</b> 项目已完成设备事实、运行时治理和社会实验场的分层整理。</figcaption></figure>
+             <figure class="paper-figure paper-architecture-figure"><div class="paper-architecture-mini paper-architecture-horizontal"><div>Device<small>camera · pose · health</small></div><div>ROS2 / MHS-MOS<small>commands · observations</small></div><div>Agnes Harness<small>state · approval · trace</small></div><div>Agent + SocialSim<small>plan · act · feedback</small></div></div><figcaption><b>System map。</b> 项目把设备事实、运行时治理和社会实验场分层整理。</figcaption></figure>
             <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>模块</th><th>负责什么</th><th>不负责什么</th></tr></thead><tbody><tr><td>Agnes Harness</td><td>任务状态、工具审批、执行记录、证据、恢复与可复盘会话</td><td>不替代机器人本体和实时控制器。</td></tr><tr><td>MHS / MOS</td><td>MHS 传递命令与动作；MOS 提供设备和传感器观测</td><td>不把高层 Agent 直接变成安全控制回路。</td></tr><tr><td>ROS2</td><td>用 node、topic、service、action 组织模块通信</td><td>不自动保证上层规划正确。</td></tr><tr><td>设备控制器</td><td>实时运动、互锁、急停、断联后的本地接管</td><td>不由 LLM 文本替代。</td></tr></tbody></table></div>
           </article>
 
@@ -72,15 +72,15 @@
           </article>
 
           <article class="paper-section-block" id="scope">
-             <p class="mini-kicker">05 / COMPLETED OUTPUT AND SAFETY</p>
+             <p class="mini-kicker">05 / OUTPUT AND SAFETY</p>
              <h3>项目成果与设备安全边界</h3>
-             <div class="paper-split"><article><h4>已完成成果</h4><ul><li>Agnes Harness 运行和治理骨架的职责划分；</li><li>ROS2、MHS/MOS、视觉、规划和执行模块的接口设计；</li><li>社会仿真环境、角色关系和多轮反馈机制；</li><li>分层评测、失败归因和恢复机制的完整协议。</li></ul></article><article><h4>系统安全职责</h4><ul><li>实时运动、互锁、急停和断联接管由设备控制器负责；</li><li>仿真行为和设备行为分别记录、分别解释；</li><li>Harness 负责高层状态、审批、轨迹和恢复；</li><li>Agent 规划通过声明能力和工具通道进入执行链路。</li></ul></article></div>
-             <div class="paper-sources"><a class="paper-source-card" href="../embodied-socialsim.html"><span>DETAILED RESEARCH</span><strong>完整调研子页</strong><small>架构、协议、相关工作、风险与交付说明。</small></a><a class="paper-source-card" href="https://github.com/AgnesAI-Labs/agnes-harness" target="_blank" rel="noreferrer"><span>RUNTIME SOURCE</span><strong>Agnes Harness</strong><small>公开运行时、插件、审批和设备接入文档。</small></a><a class="paper-source-card" href="../index.html#projects"><span>PROJECTS</span><strong>返回项目经历</strong><small>查看项目与研究方向在简历中的位置。</small></a></div>
+             <div class="paper-split"><article><h4>交付成果</h4><ul><li>Agnes Harness 运行和治理骨架的职责划分；</li><li>ROS2、MHS/MOS、视觉、规划和执行模块的接口设计；</li><li>社会仿真环境、角色关系和多轮反馈机制；</li><li>分层评测、失败归因和恢复机制的完整协议。</li></ul></article><article><h4>系统安全职责</h4><ul><li>实时运动、互锁、急停和断联接管由设备控制器负责；</li><li>仿真行为和设备行为分别记录、分别解释；</li><li>Harness 负责高层状态、审批、轨迹和恢复；</li><li>Agent 规划通过声明能力和工具通道进入执行链路。</li></ul></article></div>
+             <div class="paper-sources"><a class="paper-source-card" href="../embodied-socialsim.html"><span>PROJECT DETAILS</span><strong>项目详细介绍</strong><small>架构、协议、相关工作、风险与交付说明。</small></a><a class="paper-source-card" href="https://github.com/AgnesAI-Labs/agnes-harness" target="_blank" rel="noreferrer"><span>RUNTIME SOURCE</span><strong>Agnes Harness</strong><small>公开运行时、插件、审批和设备接入文档。</small></a><a class="paper-source-card" href="../index.html#projects"><span>PROJECTS</span><strong>返回项目经历</strong><small>查看项目与研究方向在简历中的位置。</small></a></div>
           </article>
         </section>
       </main>
 
-      <footer class="footer"><span>ZW / EMBODIED-SOCIALSIM</span><span>项目式研究介绍 · 已完成系统包</span><a href="../index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
+      <footer class="footer"><span>ZW / EMBODIED-SOCIALSIM</span><span>项目式研究介绍 · 系统包</span><a href="../index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
     </div>
   </body>
 </html>
