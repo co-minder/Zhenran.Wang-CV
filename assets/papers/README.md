@@ -15,7 +15,7 @@
 | `societybench/` | `methodology.png` | `societybench_paper_arxiv/figure/fig_methodology_v3.pdf` | Figure 2 / methodology |
 | `societybench/` | `score-bars.png` | `societybench_paper_arxiv/figure/fig_score_bars.pdf` | 结果图 |
 | `societybench/` | `ablation.png` | `societybench_paper_arxiv/figure/fig_ablation_radar.pdf` | 消融图 |
-| `groundbench/` | `cover.png` | `groundingbench_aaai/main.pdf` 第 1 页 | ICLR 工作稿首页 |
+| `groundbench/` | `cover.png` | `groundingbench_cvpr/main.pdf` 第 1 页 | CVPR 投稿稿首页（匿名评审版） |
 | `groundbench/` | `pipeline.png` | `groundingbench_aaai/figures/fig_pipeline_v2.pdf` | Figure 1 / pipeline |
 | `groundbench/` | `budget-results.png` | `groundingbench_aaai/figures/fig_budget_results.pdf` | 顶点预算结果 |
 | `groundbench/` | `qualitative-overview.jpg` | `groundingbench_aaai/figures/fig_qualitative_overview_optimized.jpg` | 补充定性材料 |
