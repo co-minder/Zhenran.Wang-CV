@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="VLN-R1：面向可泛化视觉语言导航的 LVLM 强化微调，免 critic 的 GRPO 与免参数的 Time-Decayed Reward。" />
+    <title>VLN-R1 · 论文介绍 · 王振冉</title>
+    <link rel="stylesheet" href="../styles.css?v=20261031b" />
+  </head>
+  <body class="paper-page">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <div class="page-shell">
+      <header class="research-topbar">
+        <a class="brand" href="../index.html"><span>ZR.W</span><small>CV / RESEARCH</small></a>
+        <nav class="topnav" aria-label="论文导航"><a href="../index.html#publications">← 代表论文</a><a href="groundbench.html">上一篇：GroundBench ←</a><a href="worldcup.html">下一篇：WorldCup →</a></nav>
+        <span class="top-link">PAPER 05 / VLN-R1</span>
+      </header>
+
+      <main id="main-content">
+        <section class="paper-hero paper-blue">
+          <div class="paper-hero-copy">
+            <p class="eyebrow">PAPER 05 · CVPR 2027 UNDER REVIEW</p>
+            <h1>VLN-R1</h1>
+            <h2>Reinforcement Fine-Tuning of LVLMs for Generalizable Vision-Language Navigation</h2>
+            <p class="paper-authors">Zhangyang Qi<sup>†</sup>, <b>Zhenran Wang</b><sup>†</sup>, Zhixiong Zhang, Yizhou Yu, Jiaqi Wang, Hengshuang Zhao</p>
+            <p class="paper-authors" style="margin-top:-10px;color:var(--muted);font-size:11px">† 共同第一作者 · Zhenran Wang 为第二作者，与第一作者同等贡献</p>
+            <p class="paper-abstract">基于 SFT 的视觉语言导航策略接近刚性的行为克隆：需要大量数据，且在新场景中泛化有限。VLN-R1 在 SFT 之后再加一段强化微调，用免 critic 的 GRPO 从对比采样路径中学习，从而绕开价值估计；同时构建统一的自我中心视频接口 VLN-Ego，把 MP3D、HM3D 与 RoboTHOR 放到同一套逐步真值下评测迁移。</p>
+            <div class="paper-linkrow"><a href="../index.html#publications">返回论文列表 ↗</a><a href="#results">直接看结果边界 ↗</a></div>
+          </div>
+          <aside class="paper-hero-aside">
+            <div class="paper-manuscript-card"><span>WEB READING GUIDE</span><strong>方法 · 证据导读</strong><small>没有可复用的论文首页或原始 Figure：不放封面图，也不做占位图。</small><code>VLN-Ego<br />MP3D · HM3D · RoboTHOR<br />critic-free GRPO<br />Time-Decayed Reward</code></div>
+            <div class="paper-status-box"><span>STATUS</span><strong>Under Review</strong><small>CVPR 2027 · 稿件已定稿投稿</small></div>
+          </aside>
+        </section>
+
+        <section class="paper-body">
+          <div class="paper-linkbar"><strong>一篇论文式网页导读</strong><span>SFT 瓶颈 → 强化微调 → 信用分配 → 统一接口 → 结果边界</span><nav><a href="#problem">问题</a><a href="#method">方法</a><a href="#credit">信用</a><a href="#vln-ego">数据</a><a href="#results">结果</a><a href="#boundary">边界</a></nav></div>
+
+          <div class="paper-kpis">
+            <div class="paper-kpi"><span>FAILURE MODE</span><strong>约 60%</strong><small>失败回合源于早期不可逆决策</small></div>
+            <div class="paper-kpi"><span>OPTIMIZATION</span><strong>Critic-free</strong><small>GRPO 从对比采样路径学习，不做价值估计</small></div>
+            <div class="paper-kpi"><span>TRANSFER GAIN</span><strong>+9.0 SR</strong><small>1K–2K 匹配适配预算下相对 continued SFT 的最高提升</small></div>
+            <div class="paper-kpi"><span>OFF-TARGET COST</span><strong>−1.8 SR</strong><small>非目标域的最大回退幅度</small></div>
+          </div>
+
+          <article class="paper-section-block" id="problem">
+            <p class="mini-kicker">01 / MOTIVATION</p>
+            <h3>SFT 式导航策略更像刚性行为克隆</h3>
+            <p>基于监督微调的视觉语言导航模型在演示轨迹上逐步拟合，行为接近刚性的行为克隆：一方面需要大量数据，另一方面在新场景中的泛化表现较差。当模型只是复现训练分布里的动作序列时，场景一变，策略就很难沿用。</p>
+            <p>VLN-R1 的出发点不是替换 SFT，而是在它之后补上一步：让模型在自身采样出的多条路径之间做比较，直接优化整条回合的结果，而不是继续追加示范数据。</p>
+            <div class="paper-callout"><strong>一句话概括：</strong>SFT 给出可执行的导航策略，强化微调负责把"能走"变成"在新场景里也走对"。</div>
+          </article>
+
+          <article class="paper-section-block" id="method">
+            <p class="mini-kicker">02 / METHOD</p>
+            <h3>加一段强化微调，用免 critic 的 GRPO 学路径</h3>
+            <p>论文在 SFT 之上增加一段强化微调。优化器采用免 critic 的 GRPO：同一任务采样多条路径，在组内做相对比较来构造优势，因此不需要额外训练一个价值网络去估计状态价值，省掉了 critic 的显存与调参负担。</p>
+            <div class="paper-step-grid">
+              <div class="paper-step-card"><span>01</span><strong>SFT 基座</strong><p>先用监督微调得到可执行导航的基础策略。</p></div>
+              <div class="paper-step-card"><span>02</span><strong>对比采样</strong><p>同一任务下采样多条候选路径，形成可比较的组。</p></div>
+              <div class="paper-step-card"><span>03</span><strong>免 critic 优势</strong><p>GRPO 用组内相对回报替代独立的价值估计。</p></div>
+              <div class="paper-step-card"><span>04</span><strong>强化微调</strong><p>用回合级回报更新策略，直接优化导航结果。</p></div>
+            </div>
+            <div class="paper-split" style="margin-top:30px"><article><h4>为什么不用 critic</h4><p>价值估计需要额外的网络、额外的训练信号和额外的稳定性处理。对导航这类回合级任务，组内相对比较已经能给出可用的学习信号，因此论文选择完全去掉 critic。</p></article><article><h4>代价是什么</h4><p>去掉 critic 不等于去掉方差问题。序列级回报仍然稀疏，如何把回报分配到真正重要的决策步，是下一节的核心。</p></article></div>
+          </article>
+
+          <article class="paper-section-block" id="credit">
+            <p class="mini-kicker">03 / CREDIT ASSIGNMENT</p>
+            <h3>序列级匹配会把同一回合的信用平均摊到每一步</h3>
+            <p>在序列级匹配下，一条回合只有一个结果回报，这个回报会被平均分摊到该回合的每一个动作上。但导航的失败往往不是均匀分布的：论文报告约 <b>60%</b> 的失败回合源于早期的不可逆决策——一旦前面走错，后面再正确也无法挽回。</p>
+            <p>均匀分摊信用因此把大量信号花在了"早已注定"或无关紧要的步骤上。为此论文提出免参数的 <b>Time-Decayed Reward</b>：按时间衰减对回报加权，把信用集中到视野前端，也就是更早、更关键的决策上。</p>
+            <div class="paper-callout"><strong>消融给出的结论：</strong>起作用的是"单调的早期加权"这一性质，而不是某个特定的函数形式。换成别的单调衰减形状，效果依然成立。</div>
+            <figure class="paper-figure"><div class="paper-architecture-mini"><div>Sequence-level return<small>一条回合只有一个结果信号</small></div><div>Uniform assignment<small>回报被平均摊到每一步</small></div><div>Time-Decayed Reward<small>免参数 · 单调早期加权</small></div><div>Front-loaded credit<small>信用集中到早期不可逆决策</small></div></div><figcaption><b>机制导读（网页重排）。</b> 这不是原论文 Figure，而是把"回报 → 平均分摊 → 时间衰减 → 信用前移"这一条逻辑画成阅读路径。</figcaption></figure>
+          </article>
+
+          <article class="paper-section-block" id="vln-ego">
+            <p class="mini-kicker">04 / DATA AND PROTOCOL</p>
+            <h3>VLN-Ego：把三种场景来源放进同一个自我中心视频接口</h3>
+            <p>为了在同一套协议下检验迁移，论文构建 <b>VLN-Ego</b>：它把 MP3D、HM3D 和 RoboTHOR 统一到自我中心视频接口下，并为每条轨迹提供逐步真值。在此基础上设置四级递进的迁移难度，用于分层观察方法在不同分布偏移下的表现。</p>
+            <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>层次</th><th>内容</th><th>在论文中的作用</th></tr></thead><tbody><tr><td>观测接口</td><td>自我中心视频（VLN-Ego）</td><td>把三种场景来源统一成同一种输入形式。</td></tr><tr><td>监督信号</td><td>逐步真值</td><td>让每条轨迹的每一步都有可核对的参照。</td></tr><tr><td>场景来源</td><td>MP3D · HM3D · RoboTHOR</td><td>在多种来源之间检验泛化，而不是只测单一数据集。</td></tr><tr><td>迁移难度</td><td>四级递进</td><td>分层报告"适配之后能否迁移"。</td></tr></tbody></table></div>
+            <div class="paper-split" style="margin-top:28px"><article><h4>为什么要统一接口</h4><p>三个来源的观测形式本来不一致；只有先统一成自我中心视频，才能把"域间差异"和"输入形式差异"分开，迁移结果才有可比性。</p></article><article><h4>为什么要四级难度</h4><p>单一的"跨域"设置无法区分轻微偏移和彻底换场景。递进的难度阶梯让同一方法在不同强度的分布变化下分别被测量。</p></article></div>
+          </article>
+
+          <article class="paper-section-block" id="results">
+            <p class="mini-kicker">05 / RESULTS</p>
+            <h3>优势集中在少样本适配区间</h3>
+            <p>在 1K–2K 的匹配适配预算下，VLN-R1 在每一个被适配的目标域上都优于 continued SFT，最高提升 <b>+9.0 SR</b>；同时在非目标域上最多回退 <b>−1.8 SR</b>。优势在少样本区间最大，随着可用数据增多而收窄。</p>
+            <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th>观察</th><th>论文报告值</th><th>应该如何读</th></tr></thead><tbody><tr><td>适配预算</td><td>1K–2K，与 continued SFT 匹配</td><td>两侧预算对齐后再比较，避免把数据量差异当成方法差异。</td></tr><tr><td>目标域</td><td>每个被适配目标域均优于 continued SFT，最高 +9.0 SR</td><td>增益出现在适配之后，不是零样本直接迁移。</td></tr><tr><td>非目标域</td><td>最多 −1.8 SR</td><td>迁移存在代价，不是所有域全面提升。</td></tr><tr><td>数据量效应</td><td>少样本区间优势最大，数据增多后收窄</td><td>强化微调的边际收益递减，数据充足时 SFT 会追上来。</td></tr></tbody></table></div>
+          </article>
+
+          <article class="paper-section-block" id="boundary">
+            <p class="mini-kicker">06 / EVIDENCE AND BOUNDARY</p>
+            <h3>这些数字说明什么，不说明什么</h3>
+            <div class="paper-boundary"><strong>边界提醒：</strong>以上数值均为论文报告值。本页不宣称 VLN-R1 已在真实机器人上部署，也不把数据集上的 SR 提升等同于实机可用性。</div>
+            <div class="paper-split" style="margin-top:28px"><article><h4>页面写了什么</h4><ul><li>问题：SFT 式 VLN 接近刚性行为克隆，数据需求大、新场景泛化差；</li><li>方法：SFT 之后加一段强化微调，用免 critic 的 GRPO；</li><li>机制：Time-Decayed Reward 把信用前移到早期决策；</li><li>协议：VLN-Ego 统一三种场景来源，设四级迁移难度；</li><li>结果：1K–2K 匹配预算下目标域全面提升，非目标域有回退。</li></ul></article><article><h4>页面刻意不写什么</h4><ul><li>不补写论文未在简历材料中给出的具体分数表、模型规模和训练开销；</li><li>不声称实机部署或真机验证；</li><li>不把定性示意图当作原论文 Figure；</li><li>不引用第三方复现或引用数据。</li></ul></article></div>
+          </article>
+
+          <article class="paper-section-block">
+            <p class="mini-kicker">07 / RESEARCH CONTEXT</p>
+            <h3>相关论文入口</h3>
+            <div class="paper-sources"><a class="paper-source-card" href="groundbench.html"><span>上一篇</span><strong>GroundBench</strong><small>多分辨率 exact-N 多边形定位基准与 VLM 的几何鸿沟。</small></a><a class="paper-source-card" href="worldcup.html"><span>下一篇</span><strong>WorldCup Arena</strong><small>前瞻式、无泄露的前沿大模型实时预测评测。</small></a><a class="paper-source-card" href="../index.html#publications"><span>AUTHOR PAGE</span><strong>返回论文列表</strong><small>继续浏览王振冉的其他论文与项目。</small></a></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer"><span>ZW / VLN-R1</span><span>论文介绍 · CVPR 2027 under review</span><a href="../index.html" style="color:#a9bac3">返回简历主页 ↗</a></footer>
+    </div>
+  </body>
+</html>
