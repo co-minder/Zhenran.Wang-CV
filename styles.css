@@ -271,3 +271,7 @@ code { padding: 2px 5px; background: #eef2f3; color: var(--coral); font-family: 
   .project-entry > div { grid-column: 2; grid-row: 2; }
   .project-entry > i { grid-row: 3; }
 }
+
+/* 8-card publications grid: keep the rows balanced after adding VLN-R1 */
+.paper-card-wide { grid-column: span 2; min-height: 0; padding-top: 16px; padding-bottom: 16px; }
+@media (max-width: 900px) { .paper-card-wide { grid-column: auto; } }
