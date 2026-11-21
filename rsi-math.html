@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="RSI-Math 项目介绍：数学推理模型的失败诊断与连续自改进数据框架（拟定方案，结果待验证）。" />
+    <meta name="description" content="RSI-Math 项目介绍：面向数学推理的自动化 RSI 框架，包含数学与视觉两条实验线。数学实验结果待验证。" />
     <title>RSI-Math 项目介绍 · 王振冉</title>
     <link rel="stylesheet" href="styles.css?v=20261031b" />
   </head>
@@ -21,16 +21,16 @@
           <div class="research-page-copy">
             <p class="eyebrow">PROJECT 01 · MATH REASONING · AUTO-RSI</p>
             <h1>RSI-Math<br /><em>面向数学推理的</em><br />自动化 RSI 框架</h1>
-            <p class="hero-lede">RSI-Math 是一个面向 benchmark 的自动化 RSI（递归自改进）框架：把失败诊断、可验证训练数据生成、训练与留出评测做成可复用流水线。同一框架完成 Math 与 Visual 两条实验线——视觉线产出 Visual-RSI 论文（CVPR 2027 Under Review），数学线产出 RSI-Math 数学测试/评测。数学线以 Qwen2.5-Math-1.5B 为学生、固定 Qwen2.5-Math-7B 诊断出题，LoRA 连续 5 轮；当前为拟定方案，结果待验证。</p>
+            <p class="hero-lede">RSI-Math 是一个面向 benchmark 的自动化 RSI（递归自改进）框架：把失败诊断、可验证训练数据生成、训练与留出评测做成可复用流水线。同一框架支持数学和视觉两条实验线。视觉线已形成 Visual-RSI 论文（CVPR 2027 在审）。数学线计划用 Qwen2.5-Math-1.5B 作学生模型、固定 Qwen2.5-Math-7B 诊断和出题，进行五轮 LoRA 训练，结果待验证。。</p>
             <div class="tag-row hero-tags"><span>Qwen2.5-Math-1.5B</span><span>7B 诊断模型</span><span>LoRA · 5 rounds</span><span>Verifier</span><span>GSM8K + MATH</span><span>2026.08 — 至今</span></div>
           </div>
-          <div class="research-page-aside"><div class="contact-card"><span class="card-label">PROJECT DELIVERABLE</span><strong>框架产出：论文 + 测试</strong><span>自动化 RSI 框架：Visual-RSI 论文 + RSI-Math 数学测试。</span><div class="pill-row"><span class="pill coral">5-ROUND LORA</span><span class="pill coral">3 CONTROL ARMS</span><span class="pill coral">GSM8K + MATH</span></div></div></div>
+          <div class="research-page-aside"><div class="contact-card"><span class="card-label">PROJECT DELIVERABLE</span><strong>视觉稿件在审</strong><span>数学实验结果待验证</span><div class="pill-row"><span class="pill coral">5-ROUND LORA</span><span class="pill coral">3 CONTROL ARMS</span><span class="pill coral">GSM8K + MATH</span></div></div></div>
         </section>
 
         <section class="research-body">
           <div class="research-intro-grid">
-            <article class="research-intro-card accent-coral"><p class="mini-kicker">RESEARCH BRIEF</p><h3>一句话定义</h3><p>面向 benchmark 的自动化 RSI 框架：统一把「失败诊断 → 生成可验证训练数据 → 训练 → 留出评测」做成流水线，并在同一框架下跑完 Math 与 Visual 两条实验线；视觉线产出 Visual-RSI 论文，数学线产出 RSI-Math 测试。</p></article>
-            <article class="research-intro-card accent-blue"><p class="mini-kicker">DELIVERABLES</p><h3>项目包构成</h3><p>自动化 RSI 框架（诊断、出题、验证、训练、评测流水线）、Visual 与 Math 两条实验线、Visual-RSI 论文、RSI-Math 数学测试与分学科评测记录。</p></article>
+            <article class="research-intro-card accent-coral"><p class="mini-kicker">RESEARCH BRIEF</p><h3>一句话定义</h3><p>面向 benchmark 的自动化 RSI 框架：统一把「失败诊断 → 生成可验证训练数据 → 训练 → 留出评测」做成流水线，并在同一框架下组织数学与视觉两条实验线。</p></article>
+            <article class="research-intro-card accent-blue"><p class="mini-kicker">DELIVERABLES</p><h3>项目包构成</h3><p>自动化 RSI 框架（诊断、出题、验证、训练、评测流水线）、Visual 与 Math 两条实验线、Visual-RSI 论文，以及数学线计划产出的分学科评测记录。</p></article>
             <nav class="research-toc" aria-label="RSI-Math 页面目录"><a href="#why"><span>01</span><strong>为什么做</strong></a><a href="#loop"><span>02</span><strong>闭环</strong></a><a href="#taxonomy"><span>03</span><strong>诊断维度</strong></a><a href="#architecture"><span>04</span><strong>系统结构</strong></a><a href="#protocol"><span>05</span><strong>实验协议</strong></a><a href="#generalization"><span>06</span><strong>逐轮评测</strong></a><a href="#related"><span>07</span><strong>相关工作</strong></a><a href="#risks"><span>08</span><strong>风险与交付</strong></a></nav>
           </div>
 

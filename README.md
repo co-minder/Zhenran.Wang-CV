@@ -18,7 +18,7 @@
 - 中文简历、详细版简历、英文简历的 PDF 下载；
 - 首页完整展示教育背景、8 篇代表论文、6 个项目、工作经历、奖励和技能；
 - `papers/` 下为 8 篇论文分别制作的网页介绍页，每篇可从首页论文卡片点击进入；
-- RSI-Math 与 Embodied-SocialSim 的详细研究调研独立放在两个子页面，不和论文介绍混用；
+- RSI-Math 与 Embodied-SocialSim 各有独立的项目介绍页；
 - 调研材料、研究边界、研究问题、方法路线和来源链接；
 - 论文图片来源清单见 `assets/papers/README.md`，三轮网页审核记录见 `research/site-review.md`。
 
@@ -43,7 +43,7 @@ ssh -L 5173:127.0.0.1:5173 <server>
 
 网页刻意区分两个方向：
 
-1. **RSI-Math**：数学推理模型的失败诊断、针对性数据干预和递归自改进；
+1. **RSI-Math**：面向数学推理的自动化 RSI 框架，串联失败诊断、可验证数据生成、训练和留出评测；
 2. **Embodied-SocialSim**：以 Agnes Harness 为运行骨架、面向设备接入的具身 Agent 框架；社会仿真是研究机器人感知、决策和交互的实验环境，不是项目的唯一主线。
 
 首页的论文卡片进入 `papers/*.html` 论文介绍；项目卡片进入 `rsi-math.html` 或 `embodied-socialsim.html` 调研子页。

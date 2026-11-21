@@ -177,8 +177,39 @@ code { padding: 2px 5px; background: #eef2f3; color: var(--coral); font-family: 
 .project-entry { min-height: 215px; padding: 20px; }
 .project-entry h3 { font-size: 25px; }
 .project-entry p:not(.mini-kicker) { font-size: 12px; line-height: 1.65; }
+.homepage-new :is(main, section, #research-note, #source-list)[id] { scroll-margin-top: 64px; }
+
 @media (max-width: 900px) {
-  .homepage-new .topbar { padding-left: 5vw; padding-right: 5vw; }
+  .homepage-new .topbar {
+    height: auto;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 48px auto;
+    gap: 0 12px;
+  }
+
+  .homepage-new .topbar .top-link {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .homepage-new .topbar .topnav {
+    display: flex;
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    justify-content: space-between;
+    gap: 4px 8px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+  }
+
+  .homepage-new .topbar .topnav a {
+    display: flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 5px;
+  }
+
+  .homepage-new :is(main, section, #research-note, #source-list)[id] { scroll-margin-top: 100px; }
   .profile-hero { min-height: 0; padding-top: 56px; padding-bottom: 48px; }
 }
 @media (max-width: 560px) {
